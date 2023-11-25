@@ -1,0 +1,21 @@
+{% extends 'root.html' %}
+
+{% block title %}
+سالن زیبایی
+{% endblock title %}
+
+{% block doc %}
+<div style="text-align: center;">
+    <p class="h1">
+        تاریخ را به صورت زیر وارد نمایید<p class="h1"> 1402-01-01 </p>
+    </p>
+</div>
+<form action="{% url 'SALON' %}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="sibmit" value="submit">دریافت</button>
+    </div>
+</form>
+
+{% endblock doc %}

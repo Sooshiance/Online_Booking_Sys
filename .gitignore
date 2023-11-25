@@ -1,0 +1,5 @@
+.env
+penv
+TODO.md
+__pycache__
+migrations

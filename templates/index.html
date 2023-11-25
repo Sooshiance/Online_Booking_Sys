@@ -1,0 +1,484 @@
+{% extends 'root.html' %}
+
+{% load static %}
+
+{% block title %}
+خانه
+{% endblock title %}
+
+{% block doc %}
+<main id="main">
+  <!-- ======= Why Us Section ======= -->
+  <section id="why-us" class="why-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="content">
+            <h3>چرا آروت؟</h3>
+            <p>
+              مجموعه آروت بیوتی با ارائه بهترین خدمات زیبایی آرایشی در کنار
+              شماست تا بتوانید از سلامت و زیبایی خود مطمئن شوید.همکاران ما در
+              تلاش هستند تا بتوانند یک تجربه خاطره انگیز برای شما به ارمغان
+              بیاورند
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-8 d-flex align-items-stretch">
+          <div class="icon-boxes d-flex flex-column justify-content-center">
+            <div class="row">
+              <div class="col-xl-4 d-flex align-items-stretch">
+                <div class="icon-box mt-4 mt-xl-0">
+                  <i class="bx bx-cube-alt"></i>
+                  <h4>خدمات</h4>
+                  <p>
+                    مجموعه آروت شامل طیف وسیعی از خدمات زیبایی میباشد .که
+                    میتوانید با مراجعه به لینک زیر از خدمات ما دیدن فرمایید
+                  </p>
+                  <button type="button" class="rounded-3">
+                    <a href="{% url 'SERVICES' %}"> مشاهده </a>
+                  </button>
+                </div>
+              </div>
+              <div class="col-xl-4 d-flex align-items-stretch">
+                <div class="icon-box mt-4 mt-xl-0">
+                  <i class="bx bx-receipt"></i>
+                  <h4>پرسشهای پر تکرار</h4>
+                  <p>
+                    این بخش برای شماست تا اگر پرسشی در زمینه های خدمات مجموعه
+                    داشته باشید آن را با ما به اشتراک گذاشته تا ما در اسرع وقت
+                    پرسش های شما عزیزان را پاسخ دهیم
+                  </p>
+                </div>
+              </div>
+              <div class="col-xl-4 d-flex align-items-stretch">
+                <div class="icon-box mt-4 mt-xl-0">
+                  <i class="bx bx-images"></i>
+                  <h4>بلاگ</h4>
+                  <p>
+                    این بخش برای شما عزیزان آماده شده تا بتوانید تجربه های شخصی
+                    خود را که از آروت بیوتی به یاد دارید، با دیگران نیز به
+                    اشتراک بگذارید
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Why Us Section -->
+
+  
+  <!-- ======= Counts Section ======= -->
+  
+    <div class="container">
+      <div class="row">
+        {% for field in category %}
+        <div class="col-12 col-md-4 mb-2">
+          <div class="card" style="width: 18rem">
+            <div class="card-body">
+              <img src="{{ field.category_cover.url }}" class="img-fluid" alt="{{ field.alt_cover.url }}" style="height: 150px;" />
+              <h5 class="card-title">{{ field.title }}</h5>
+              <p class="card-text ">{{ field.description }}</p>
+              <a href="{% url 'CATEGORY' field.slug %}" class="btn btn-info">
+                دیدن دسته
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  <!-- End Counts Section -->
+
+  <!-- ======= Services Section ======= -->
+  <div class="container">
+    <div class="row mb-3 mt-3">
+      {% for service in services %}
+      <div class="col-12 col-md-4 mb-2">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ service.service_cover.url }}" class="card-img-top" alt="{{ service.alt_cover.url }}" style="height: 150px;" />
+          <div class="card-body">
+            <h5 class="card-title">{{ service.title }}</h5>
+            <p class="card-text">{{ service.description }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- End Services Section -->
+
+  <!-- ======= Departments Section ======= -->
+  <section id="departments" class="departments">
+    <div class="container">
+      <div class="section-title">
+        <h2>دپارتمان های آروت</h2>
+        <p>
+          دپارتمان های آروت در دو بخش سالن زیبایی و کلینیک زیبایی تقسیم شده تا
+          .بیشترین خدمات ممکن در کوتاه ترین زمان ممکن برای شما مراجعه کنندگان
+          عزیز فراهم آورد
+        </p>
+      </div>
+
+      <div class="row gy-4">
+        <div class="col-lg-3">
+          <ul class="nav nav-tabs flex-column">
+            <li class="nav-item">
+              <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">کلینیک زیبایی</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#tab-2">سالن زیبایی</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-9">
+          <div class="tab-content">
+            <div class="tab-pane active show" id="tab-1">
+              <div class="row gy-4">
+                <div class="col-lg-8 details order-2 order-lg-1">
+                  <h3>کلینیک زیبایی</h3>
+                  <p>
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
+                    با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه
+                    و مجله در ستون و سطرآنچنان که
+                  </p>
+                </div>
+                <div class="col-lg-4 text-center order-1 order-lg-2">
+                  <img src="{% static 'assets/img/departments-1.jpg' %}" alt="" class="img-fluid" />
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-2">
+              <div class="row gy-4">
+                <div class="col-lg-8 details order-2 order-lg-1">
+                  <p>
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
+                    با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه
+                    و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
+                    تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
+                    کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
+                    آینده،
+                  </p>
+                </div>
+                <div class="col-lg-4 text-center order-1 order-lg-2">
+                  <img src="{% static 'assets/img/departments-2.jpg' %}" alt="" class="img-fluid" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Departments Section -->
+
+  <!-- ======= Doctors Section ======= -->
+  <section id="doctors" class="doctors">
+    <div class="container">
+      <div class="section-title">
+        <h2>Doctors</h2>
+        <p>
+          Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
+          aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos
+          quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+          fugiat sit in iste officiis commodi quidem hic quas.
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="member d-flex align-items-start">
+            <div class="pic">
+              <img src="{% static 'assets/img/doctors/doctors-1.jpg' %}" class="img-fluid" alt="" />
+            </div>
+            <div class="member-info">
+              <h4>Walter White</h4>
+              <span>Chief Medical Officer</span>
+              <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mt-4 mt-lg-0">
+          <div class="member d-flex align-items-start">
+            <div class="pic">
+              <img src="{% static 'assets/img/doctors/doctors-2.jpg' %}" class="img-fluid" alt="" />
+            </div>
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+              <span>Anesthesiologist</span>
+              <p>
+                Aut maiores voluptates amet et quis praesentium qui senda para
+              </p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mt-4">
+          <div class="member d-flex align-items-start">
+            <div class="pic">
+              <img src="{% static 'assets/img/doctors/doctors-3.jpg' %}" class="img-fluid" alt="" />
+            </div>
+            <div class="member-info">
+              <h4>William Anderson</h4>
+              <span>Cardiology</span>
+              <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mt-4">
+          <div class="member d-flex align-items-start">
+            <div class="pic">
+              <img src="{% static 'assets/img/doctors/doctors-4.jpg' %}" class="img-fluid" alt="" />
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+              <span>Neurosurgeon</span>
+              <p>
+                Dolorum tempora officiis odit laborum officiis et et accusamus
+              </p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Doctors Section -->
+
+  <!-- ======= Frequently Asked Questions Section ======= -->
+  <section id="faq" class="faq section-bg">
+    <div class="container">
+      <div class="section-title">
+        <h2>پرسش های پر تکرار</h2>
+        <p>
+          در این بخش سوالات پر تکراری که بیشتر مخاطبین در گیر آن هستند را
+          میتوانید پیدا کنید; چنانچه این بخش برای شما کافی نبود میتوانید با
+          مراجعه به بخش <a href="{% url 'DAILY' %}">پرسشها</a> از مدیر سایت
+          سوالات خود را بپرسید، تا در اسرع وقت به پرسشهای شما عزیزان پاسخ داده
+          شود.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <ul>
+          <li data-aos="fade-up">
+            <i class="bx bx-help-circle icon-help"></i>
+            <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">برای دریافت خدمات آروت بیوتی چه
+              کاری باید انجام دهم؟<i class="bx bx-chevron-down icon-show"></i><i
+                class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+              <p>
+                برای دریافت خدمات، نخست باید ثبت نام نموده و پس از احراز هویت در
+                <a href="{% url 'LOGIN' %}">اینجا</a>
+                میتوانید از خدمات ما بهره ببرید.
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="100">
+            <i class="bx bx-help-circle icon-help"></i>
+            <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">آیا خدمات شما برای روزهای تعطیل
+              نیز همچنان پابرجا نیز خواهد بود؟
+              <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                خدمات اروت بیوتی در روزهای تعطیل، فقط با هماهنگی قبلی صورت
+                میپذیرد
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="200">
+            <i class="bx bx-help-circle icon-help"></i>
+            <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">من خدمات شما را دریافت کرده ام
+              اما تایید مدیر برای من فعال نشده؟
+              <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                چنانچه پس از سه روز، تایید مدیر را دریافت نکردید مراتب را به
+                شماره هایی که در بخش مخاطبین سایت قرار دارند، اطلاع دهید
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="300">
+            <i class="bx bx-help-circle icon-help"></i>
+            <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">پاسخ پرسش هایی که ارسال کرده ام
+              را از کجا میتوانم پیدا کنم؟
+              <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                پاسخ پرسش هایی که شما ارسال کرده اید، به پست الکترونیکی که شما
+                با آن در تارنمای ما ثبت نام کردید، فرستاده میشود
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="400">
+            <i class="bx bx-help-circle icon-help"></i>
+            <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">حساب کاربری من غیر فعال شده؟<i
+                class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                اگر حساب کاربری شما غیر فعال شد و شما نتوانستید در تارنما احراز
+                هویت نمایید، مراتب را به مدیر سایت اطلاع دهید تا پیگیری های لازم
+                صورت گیرد.
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="400">
+            <i class="bx bx-help-circle icon-help"></i>
+            <a data-bs-toggle="collapse" data-bs-target="#faq-list-6" class="collapsed">اگر بخواهم آدرس پست الکترونیکی
+              خود را به روز کنم؟<i class="bx bx-chevron-down icon-show"></i><i
+                class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-6" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                همکاران ما در بخش توسعه در تلاش هستند تا هر چه سریعتر این خدمات
+                را در دسترس شما قرار دهند
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- End Frequently Asked Questions Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  {% comment %} <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper-wrapper">
+          {% for post in posts %}
+          <div class="swiper-slide">
+            <div class="testimonial-wrap">
+              <div class="testimonial-item">
+                <img src="{% static 'assets/img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="" />
+                <h3>{{ post.user.first_name }}</h3>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  {{ post.txt }}
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section> {% endcomment %}
+  <!-- End Testimonials Section -->
+
+  <!-- ======= Gallery Section ======= -->
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <div class="section-title">
+        <h1>گالری</h1>
+        <p>
+          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
+          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
+          کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی
+          در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می
+          طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
+          الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این
+          صورت می توان امید داشت که تمام
+        </p>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row g-0">
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="assets/img/gallery/gallery-1.jpg" class="galelry-lightbox">
+              <img src="{% static 'assets/img/gallery/gallery-1.jpg' %}" alt="" class="img-fluid" />
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="assets/img/gallery/gallery-2.jpg" class="galelry-lightbox">
+              <img src="{% static 'assets/img/gallery/gallery-2.jpg' %}" alt="" class="img-fluid" />
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="assets/img/gallery/gallery-3.jpg" class="galelry-lightbox">
+              <img src="{% static 'assets/img/gallery/gallery-3.jpg' %}" alt="" class="img-fluid" />
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="assets/img/gallery/gallery-4.jpg" class="galelry-lightbox">
+              <img src="{% static 'assets/img/gallery/gallery-4.jpg' %}" alt="" class="img-fluid" />
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <a href="assets/img/gallery/gallery-5.jpg" class="galelry-lightbox">
+              <img src="{% static 'assets/img/gallery/gallery-5.jpg' %}" alt="" class="img-fluid" />
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <img src="{% static 'assets/img/gallery/gallery-6.jpg' %}" alt="" class="img-fluid" />
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <img src="{% static 'assets/img/gallery/gallery-7.jpg' %}" alt="" class="img-fluid" />
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+            <img src="{% static 'assets/img/gallery/gallery-8.jpg' %}" alt="" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock doc %}

@@ -1,0 +1,37 @@
+{% extends 'root.html' %}
+
+{% load static %}
+
+{% block title %}
+پرسش روزانه
+{% endblock title %}
+
+{% block doc %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a href="{% url 'ASKS' %}" class="d-grid btn btn-info m-3">
+                سوالات خود را بنویسید
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    {% for field in questions %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ field.title }}
+            </h5>
+            <p class="card-text">
+                {{ field.txt }}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock doc %}

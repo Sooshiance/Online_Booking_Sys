@@ -1,0 +1,49 @@
+{% extends 'root.html' %}
+
+{% load static %}
+
+{% block title %}
+انتخاب خدمات
+{% endblock title %}
+
+{% block doc %}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">
+                    مطب
+                </h3>
+                <p class="card-text">
+                    مطب زیبایی اروت بیوتی با ارائه بهترین خدمات روز
+                    .امیدوار است یک تجربه خاطره انگیز برای شا عزیزان فراهم آورد
+                </p>
+                <img src="{% static 'assets/img/clinic.jpg' %}" class="img-fluid">
+                <div class="d-grid m-5">
+                    <a href="{% url 'CLINIC' %}" class="btn btn-info">مشاهده</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">
+                    سالن
+                </h3>
+                <p>
+                    سالن زیبایی آروت بیوتی با مجرب ترین تیم خدمات در زمینه های
+                    آرایشی و زیبایی پذیرای شما عزیزان خواهد بود تا یک تجربه
+                    .متفاوت را برای شما رقم بزنیم
+                </p>
+                <img src="{% static 'assets/img/clinic.jpg' %}" class="img-fluid">
+                <div class="d-grid m-5">
+                    <a href="{% url 'SALON' %}" class="btn btn-info">مشاهده</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock doc %}

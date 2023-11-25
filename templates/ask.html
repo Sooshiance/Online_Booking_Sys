@@ -1,0 +1,34 @@
+{% extends 'root.html' %}
+
+{% load static %}
+
+{% block title %}
+پرسش شما
+{% endblock title %}
+
+{% block doc %}
+<p class="text-center">
+    اعداد با فرمت انگلیسی پذیرفته میشوند
+</p>
+<div class="container">
+    <div class="row">
+        <form action="{% url 'ASKS' %}" method="post">
+            {% for field in form %}
+                <div class="col">
+                    <label for="">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            {% csrf_token %}
+            <div class="text-center d-grid pt-1 mb-5 pb-1">
+                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                type="submit" value="submit">
+                    ثبت
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock doc %}

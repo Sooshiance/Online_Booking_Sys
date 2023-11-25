@@ -1,0 +1,41 @@
+{% extends 'root.html' %}
+
+{% block title %}
+    دیدگاه 
+{% endblock title %}
+
+{% block doc %}
+
+<div class="container-fluid">
+    <div class="row m-5">
+        <div class="col-12">
+            <a href="{% url 'SHARE' %}" class="d-grid btn btn-dark m-3">
+                نظر خود را بنویسید
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    {% for field in comments %}
+        <div class="row mb-5">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        {{ field.user.first_name }} گفته {{ field.title }} / {{ field.vote }}
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>
+                                {{ field.txt }}
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+    
+{% endblock doc %}

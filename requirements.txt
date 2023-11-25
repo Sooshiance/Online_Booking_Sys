@@ -1,0 +1,9 @@
+asgiref==3.7.2
+Django==4.2.3
+django-jalali==6.0.1
+django-sslserver==0.22
+jdatetime==4.1.1
+Pillow==10.0.0
+psycopg2-binary==2.9.6
+python-decouple==3.8
+sqlparse==0.4.4

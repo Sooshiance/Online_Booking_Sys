@@ -1,0 +1,42 @@
+{% extends 'root.html' %}
+
+{% load static %}
+
+{% block title %}
+مجموعه
+{% endblock %}
+
+{% block doc %}
+<div class="container">
+    <div class="card mb-5" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ category.title }}
+                    </h5>
+                    <p class="card-text">
+                        {{ category.description }}
+                    </p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card p-5 mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                {% for field in services %}
+                <img src="{{ field.service_cover.url }}" class="card-img-top" alt="{{ field.alt_cover.url }}">
+                <div class="col-md-8">
+                    <h5 class="card-title">
+                        {{ field.title }}
+                    </h5>
+                    <p class="card-text">
+                        {{ field.description }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

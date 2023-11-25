@@ -1,0 +1,23 @@
+{% extends 'root.html' %}
+
+{% load static %}
+خدمات
+{% block title %}
+
+{% endblock title %}
+
+{% block doc %}
+<div class="card text-center">
+    <div class="card-header">
+        {{ service.slug }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">
+            {{ service.title }}
+        </h5>
+        <p class="card-text">
+            {{ service.description }}
+        </p>
+    </div>
+</div>
+{% endblock doc %}

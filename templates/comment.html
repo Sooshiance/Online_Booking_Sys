@@ -1,0 +1,35 @@
+{% extends 'root.html' %}
+
+{% block title %}
+    نوشتن دیدگاه
+{% endblock title %}
+
+{% block doc %}
+
+<div class="container">
+    <p class="text-center">
+        برای نوشتن اعداد از اعداد انگلیسی استفاده کنید
+    </p>
+    <div class="row">
+        <form action="{% url 'SHARE' %}" method="post">
+            {% for field in form %}
+                <div class="col">
+                    <label for="">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            {% csrf_token %}
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block mb-4 text-center">ثبت</button>
+            </div>
+
+        </form>
+            
+    </div>
+</div>
+    
+{% endblock doc %}
