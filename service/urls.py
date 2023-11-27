@@ -10,6 +10,6 @@ urlpatterns = [
     path('services/', allService, name='SERVICES'),
     path('service/<str:slug>/', eachService, name='SERVICE'),
     path('category-feeds/', CategoryFeed(), name='CATEGORY-FEED'),
-    # path('service-feeds/', AllServiceFeed.allService(), name='SERVICE-FEED'),
-    # path('gallery-feeds/', GalleryFeed.allGallery(), name='GALLERY-FEED'),
+    path('service-feeds/', AllServiceFeed(), name='SERVICE-FEED'),
+    path('gallery-feeds/', GalleryFeed(), name='GALLERY-FEED'),
 ]

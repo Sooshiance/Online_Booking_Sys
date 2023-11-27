@@ -19,11 +19,27 @@ class CategoryFeed(Feed):
         return Category.objects.filter(description=desc)
 
 
-# class AllServiceFeed(Feed):
-#     def allService(self):
-#         return AllService.objects.all()
+class AllServiceFeed(Feed):
+    title_template = 'services'
+    link = 'service-feeds/'
+    description_template = '''We will add new features from our Service in here'''
+    
+    def allService(self):
+        return AllService.objects.order_by('title')[:10]
+    
+    def items(self, obj):
+        # obj is the category object that is passed from the get_object method
+        return AllService.objects.filter(title=obj)
 
 
-# class GalleryFeed(Feed):
-#     def allGallery(self):
-#         return Gallery.objects.all()
+class GalleryFeed(Feed):
+    title_template = 'gallery'
+    link = 'gallery-feeds/'
+    description_template = '''We will add new features from our Gallery in here'''
+    
+    def allGallery(self):
+        return Gallery.objects.order_by('title')[:10]
+    
+    def items(self, obj):
+        # obj is the category object that is passed from the get_object method
+        return Gallery.objects.filter(title=obj)
