@@ -7,6 +7,8 @@ It's so called 'Reservation System' with benefits like :
 - Blog section for user comment about their experience of Aroot Beauty
 - Question section for users to ensure from the services
 - Full Authentication cycle
+- RSS feeds for better indexing 
+- Meta third-party for SEO and Ranking
 
 If you found any bug or better solution for a 
 Reservation system like this, send a comment for me.
