@@ -11,11 +11,12 @@ class CategoryFeed(Feed):
     def allCategory(self):
         return Category.objects.order_by('title')[:10]
     
-    def item_title(self, item):
-        return item.title
+    def items(self, obj):
+        # obj is the category object that is passed from the get_object method
+        return Category.objects.filter(title=obj)
     
-    def item_description(self, item):
-        return item.description
+    def item_description(self, desc):
+        return Category.objects.filter(description=desc)
 
 
 # class AllServiceFeed(Feed):
