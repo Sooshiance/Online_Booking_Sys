@@ -123,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 
-LANGUAGE_CODE = 'fa-ir'
+LANGUAGE_CODE = 'fa-IR'
 
 TIME_ZONE = 'Asia/Tehran'
 
@@ -176,8 +176,8 @@ DATABASES = {
 META_SITE_PROTOCOL = 'https'
 META_SITE_DOMAIN = config('META_SITE_DOMAIN')
 META_SITE_NAME = config('META_SITE_NAME')
-META_DEFAULT_KEYWORDS = []
-META_INCLUDE_KEYWORDS = []
+META_DEFAULT_KEYWORDS = ["پوست", "مو", "زیبایی", "جوانسازی", ""]
+META_INCLUDE_KEYWORDS = ["هایفو", "بوتاکس", "فیلر", "مزوتراپی", "ژل", "ناخن", "لیزر", "ابرو"]
 META_OG_NAMESPACES = []
 
 
