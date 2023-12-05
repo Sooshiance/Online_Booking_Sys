@@ -92,11 +92,11 @@ class User(AbstractBaseUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر')
-    email = models.EmailField(verbose_name='پست الکترونیکی')
-    phone = models.CharField(max_length=11, verbose_name='شماره تماس')
-    first_name  = models.CharField(max_length=30, null=True, blank=True, verbose_name='نام')
-    last_name   = models.CharField(max_length=50, null=True, blank=True, verbose_name='نام خانوادگی')
+    user       = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    email      = models.EmailField(verbose_name='پست الکترونیکی')
+    phone      = models.CharField(max_length=11, verbose_name='شماره تماس')
+    first_name = models.CharField(max_length=30, null=True, blank=True, verbose_name='نام')
+    last_name  = models.CharField(max_length=50, null=True, blank=True, verbose_name='نام خانوادگی')
     
     def __str__(self) -> str:
         return f"{self.user} {self.email}"

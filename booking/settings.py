@@ -176,7 +176,7 @@ DATABASES = {
 META_SITE_PROTOCOL = 'https'
 META_SITE_DOMAIN = config('META_SITE_DOMAIN')
 META_SITE_NAME = config('META_SITE_NAME')
-META_DEFAULT_KEYWORDS = ["پوست", "مو", "زیبایی", "جوانسازی", ""]
+META_DEFAULT_KEYWORDS = ["پوست", "مو", "زیبایی", "جوانسازی", "چشم"]
 META_INCLUDE_KEYWORDS = ["هایفو", "بوتاکس", "فیلر", "مزوتراپی", "ژل", "ناخن", "لیزر", "ابرو"]
 META_OG_NAMESPACES = []
 
