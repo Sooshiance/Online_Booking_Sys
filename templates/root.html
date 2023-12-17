@@ -1,226 +1,172 @@
 <!DOCTYPE html>
 {% load static %}
+{% load meta %}
 <html lang="fa-ir" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="وبسایت آروت بیوتی" name="description">
-  <meta content="آروت،زیبایی،پوست،مژه،ابرو،چشم،لیزر،هایفو،بوتاکس،
-  فیلر،ژل،مزو تراپی،لاغری،مشاوره تغذیه،ناخن،" name="keywords">
-
-  <title>
-    {% block title %}
-    
-    {% endblock title %}
-  </title>
-
-  <!-- Vendor CSS Files -->
-  
-  <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.rtl.min.css' %}">
-  <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-
-  <!-- =======================================================
+  <head>
+    {% include "meta/meta.html" %}
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="وبسایت آروت بیوتی" name="description">
+    <meta content="آروت،زیبایی،پوست،مژه،ابرو،چشم،لیزر،هایفو،بوتاکس، فیلر،ژل،مزو تراپی،لاغری،مشاوره تغذیه،ناخن،"
+          name="keywords">
+    <title>
+      {% block title %}
+      {% endblock title %}
+    </title>
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet"
+          href="{% static 'assets/vendor/bootstrap/css/bootstrap.rtl.min.css' %}">
+    <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <!-- =======================================================
   * Template Name: Medilab
   * Updated: Jun 23 2023 with Bootstrap v5.3.0
   * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-</head>
-
-<body>
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto" href="{% url 'HOME' %}">خانه</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'SERVICES' %}">دیدن خدمات</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'RESERVED' %}">دریافت نوبت</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'DAILY' %}">پرسشها</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'SHOW' %}">نظرسنجی</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'LOGOUT' %}" class="appointment-btn scrollto">
-          خروج
-        </a>
-        <a href="{% url 'PROFILE' %}" class="appointment-btn scrollto">
-          پروفایل{{ user.username }}
-        </a>
-      {% else %}
-        <a href="{% url 'LOGIN' %}" class="appointment-btn scrollto">
-          ورود 
-        </a>
-      {% endif %}
-      <h1 class="logo me-auto"><a href="{% url 'HOME' %}">آروت</a></h1>
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container">
-      <h1>به مجموعه آروت بیوتی خوش آمدید</h1>
-      <h2>ما اینجا هستیم تا زیبایی شما را دو چندان کنیم</h2>
-      <a href="{% url 'SERVICES' %}" class="btn-get-started scrollto">دیدن خدمات</a>
-      {% comment %} {% include '_msg_.html' %} {% endcomment %}
-      {% if messages %}
-        {% for message in messages %}
-          <div style="margin-top: 5px;z-index: 1;">
-              <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                  <strong>{{message}}</strong>
-              </div>
-          </div>
-        {% endfor %}
-      {% endif %}
-    </div>
-    
-  </section><!-- End Hero -->
-
-  <main id="main">
-    <section class="breadcrumbs">
+  </head>
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li>
+              <a class="nav-link scrollto" href="{% url 'HOME' %}">خانه</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="{% url 'SERVICES' %}">دیدن خدمات</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="{% url 'RESERVED' %}">دریافت نوبت</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="{% url 'DAILY' %}">پرسشها</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="{% url 'SHOW' %}">نظرسنجی</a>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'LOGOUT' %}" class="appointment-btn scrollto">خروج</a>
+          <a href="{% url 'PROFILE' %}" class="appointment-btn scrollto">پروفایل{{ user.username }}</a>
+        {% else %}
+          <a href="{% url 'LOGIN' %}" class="appointment-btn scrollto">ورود</a>
+        {% endif %}
+        <h1 class="logo me-auto">
+          <a href="{% url 'HOME' %}">آروت</a>
+        </h1>
+      </div>
+    </header>
+    <!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
       <div class="container">
-        {% block doc %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {% endblock doc %}
+        <h1>به مجموعه آروت بیوتی خوش آمدید</h1>
+        <h2>ما اینجا هستیم تا زیبایی شما را دو چندان کنیم</h2>
+        <a href="{% url 'SERVICES' %}" class="btn-get-started scrollto">دیدن خدمات</a>
+        {% comment %} {% include '_msg_.html' %} {% endcomment %}
+        {% if messages %}
+          {% for message in messages %}
+            <div style="margin-top: 5px;z-index: 1;">
+              <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                <strong>{{ message }}</strong>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </section>
-  </main>
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>آروت</h3>
-            <p>شماره های تماس</p>
-            <div>021-88528452</div>
-            <div>09125167627</div>
+    <!-- End Hero -->
+    <main id="main">
+      <section class="breadcrumbs">
+        <div class="container">
+          {% block doc %}
+          {% endblock doc %}
+        </div>
+      </section>
+    </main>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 footer-contact">
+              <h3>آروت</h3>
+              <p>شماره های تماس</p>
+              <div>021-88528452</div>
+              <div>09125167627</div>
+            </div>
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>لینک های مفید</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="{% url 'HOME' %}">خانه</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="{% url 'SERVICES' %}">خدمات</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="{% url 'DAILY' %}">پرسشها</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-md-6 footer-newsletter">
+              <h4>به خانواده خبری آروت بیوتی بپیوندید</h4>
+              <p>از آخرین خدمات آروت بیوتی با خبر باشید</p>
+              <form action="{% url 'HOME' %}" method="post">
+                {% csrf_token %}
+                <input type="email" name="email" class="rounded-4">
+                <input type="submit" value="Subscribe">
+              </form>
+            </div>
           </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>لینک های مفید</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'HOME' %}">خانه</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'SERVICES' %}">خدمات</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'DAILY' %}">پرسشها</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>به خانواده خبری آروت بیوتی بپیوندید</h4>
-            <p>
-              از آخرین خدمات آروت بیوتی با خبر باشید
-            </p>
-            <form action="{% url 'HOME' %}" method="post">
-              {% csrf_token %}
-              <input type="email" name="email" class="rounded-4"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-
         </div>
       </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-
-      <div class="me-md-auto text-center text-md-start">
-        <div class="copyright">
-        <div class="credits">
-          <p>
-            همه حقوق این اثر متعلق به آروت بیوتی می باشد و هر گونه کپی برداری بدون اجازه صاحب اثر پیگرد قانونی دارد
-          </p>
-        </div>
-        <div class="credits">
-          <p>
-            طراحی شده توسط مهدی داوری و فراز رشیدی
-          </p>
+      <div class="container d-md-flex py-4">
+        <div class="me-md-auto text-center text-md-start">
+          <div class="copyright">
+            <div class="credits">
+              <p>همه حقوق این اثر متعلق به آروت بیوتی می باشد و هر گونه کپی برداری بدون اجازه صاحب اثر پیگرد قانونی دارد</p>
+            </div>
+            <div class="credits">
+              <p>طراحی شده توسط مهدی داوری و فراز رشیدی</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </footer><!-- End Footer -->
-
-  <!-- Vendor JS Files -->
-  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
-  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static 'assets/js/main.js' %}"></script>
-  <script>
+    </footer>
+    <!-- End Footer -->
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script>
     var m = document.getElementsByClassName("alert");
     
     setTimeout(function(){
@@ -243,7 +189,5 @@ for (i = 0; i < acc.length; i++) {
   });
 }
     </script>
-    
-
-</body>
+  </body>
 </html>
