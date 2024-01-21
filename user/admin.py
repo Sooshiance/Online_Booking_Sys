@@ -15,6 +15,7 @@ class Admin(UserAdmin):
     list_display_links = ('phone', 'email')
     # This line below added because 'ordering' attribute need a dependency
     ordering = ('email', 'joined_at')
+    readonly_fields = ('joined_at', 'pk')
 
 
 class AdminProfile(admin.ModelAdmin):

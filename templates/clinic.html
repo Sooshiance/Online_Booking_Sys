@@ -1,34 +1,27 @@
-{% extends 'root.html' %}
-
+{% extends "root.html" %}
 {% load static %}
-
 {% block title %}
-کلینیک
+    کلینیک
 {% endblock title %}
-
 {% block doc %}
-
-<div style="text-align: center;">
-    <p class="h1">
-        تاریخ را به صورت زیر وارد نمایید<p class="h2"> 1402-01-01 </p>
-    </p>
-</div>
-<form action="{% url 'CLINIC' %}" method="post">
-    {% csrf_token %}
-    <label for="">عنوان</label>
-    {{ form.title }}
-    <label for="">ساعت</label>
-    {{ form.hour }}
-    <label for="">روز</label>
-    {% comment %} {% load jformat %}
-    {{ form.date|jformat }} {% endcomment %}
-    {{ form.date }}
-    <label for="">توضیحات</label>
-    {{ form.description }}
-      
-    <div class="d-grid gap-2">
-      <button type="submit" class="btn btn-primary">دریافت</button>
+    <div style="text-align: center;">
+        <p class="h1">
+            تاریخ را به صورت زیر وارد نمایید
+            <p class="h2">1402-01-01</p>
+        </p>
     </div>
-</form>
-
+    <form action="{% url 'CLINIC' %}" method="post">
+        {% csrf_token %}
+        <label for="">عنوان</label>
+        {{ form.title }}
+        <label for="">روز</label>
+        {{ form.date }}
+        <label for="">ساعت</label>
+        {{ form.hour }}
+        <label for="">توضیحات</label>
+        {{ form.description }}
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">دریافت</button>
+        </div>
+    </form>
 {% endblock doc %}

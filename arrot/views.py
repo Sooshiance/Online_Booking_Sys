@@ -18,6 +18,7 @@ def reserveClinicView(request):
                 date = form.cleaned_data['date']
                 hour = form.cleaned_data['hour']
                 description = form.cleaned_data['description']
+                
                 object = ArrotModel.objects.create(title=title, date=date, hour=hour, description=description,
                                                     user=request.user)
                 object.save()
@@ -44,6 +45,7 @@ def reserveSalonView(request):
                 date = form.cleaned_data['date']
                 hour = form.cleaned_data['hour']
                 description = form.cleaned_data['description']
+                
                 object = GolsaModel.objects.create(title=title, date=date, hour=hour, description=description,
                                                     user=request.user)
                 object.save()

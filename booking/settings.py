@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'jdatetime',
     # "sslserver",
     "meta",
-    'jdatetime',
     # 'rest_framework',
     'user.apps.UserConfig',
     'service.apps.ServiceConfig',
@@ -121,9 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
+LANGUAGE_CODE = 'fa-ir'
 
-LANGUAGE_CODE = 'fa-IR'
+locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 
 TIME_ZONE = 'Asia/Tehran'
 
@@ -172,10 +172,10 @@ DATABASES = {
 
 
 # TODO : Important for Wallet model
-MAX_LIMIT = 20
+MAX_LIMIT = 10
 
 
-# meta tag for Open Graph and SEO
+# TODO: meta tag for Open Graph and SEO
 META_SITE_PROTOCOL = 'https'
 META_SITE_DOMAIN = config('META_SITE_DOMAIN')
 META_SITE_NAME = config('META_SITE_NAME')
