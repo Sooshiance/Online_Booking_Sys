@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    "django_jalali",
     'jdatetime',
     # "sslserver",
     "meta",
@@ -128,6 +129,8 @@ locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 

@@ -12,10 +12,11 @@
     </div>
     <form action="{% url 'CLINIC' %}" method="post">
         {% csrf_token %}
-        <label for="">عنوان</label>
+        <label for="text">عنوان</label>
         {{ form.title }}
-        <label for="">روز</label>
-        {{ form.date }}
+        <label for="date">روز</label>
+        {% load jformat %}
+        {{ form.date|jformat }}
         <label for="">ساعت</label>
         {{ form.hour }}
         <label for="">توضیحات</label>
