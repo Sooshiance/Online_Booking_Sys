@@ -1,104 +1,84 @@
 {% extends 'root.html' %}
-
 {% block title %}
     پروفایل {{ profile.username }}
 {% endblock title %}
-
 {% block doc %}
-
-<div class="container">
-    <div class="row">
-        <div class="col h2 text-center">
-            {{ profile.email }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p class="text-center h1" style="color: red;">
-                توجه داشته باشید، اگر گزینه حذف را انتخاب کنید، نوبت شما بلافاصله حذف خواهد شد:
-            </p>
-        </div>
-    </div>
-    <div class="row mt-3 mb-3">
-
-        <p class="text-center">
-            خدمات مطب آروت بیوتی که تا کنون شما انتخاب کرده اید:
-        </p>
-        
-        <div class="row mb-4 mt-4">
-            <div class="col-2">عنوان</div>
-            <div class="col-2">ساعت</div>
-            <div class="col-3">روز</div>
-            <div class="col-3">تایید مدیر</div>
-            <div class="col-2">حذف</div>
-        </div>
-        <div class="row mb-4 mt-4">
-            {% for afield in arrot %}
-                <div class="col-2 mb-3 mt-3 p-3"> {{ afield.title }} </div>
-                <div class="col-2 mb-3 mt-3 p-3"> {{ afield.hour }} </div>
-                <div class="col-3 mb-3 mt-3 p-3"> {{ afield.date }} </div>
-                
-                {% if afield.admin_approval %}
-                    <div class="col-3 mb-3 mt-3 p-3" style="color: rgb(0, 200, 0);"> تایید شده </div>
-                {% else %}
-                    <div class="col-3 mb-3 mt-3 p-3" style="color: red;"> تایید نشده </div>
-                {% endif %}
-                    
-                <div class="col-2 mb-3 mt-3 p-3"> <a href="{% url 'DELETEARROT' afield.pk %}" style="color: red;">حذف</a> </div>
-            {% endfor %}
-        </div>
-            
-    </div>
-    <div class="row mt-3 mb-3">
-
-        <p class="text-center mt-5">
-            خدمات سالن آروت بیوتی که تا کنون شما انتخاب کرده اید:
-        </p>
-
-        <div class="row mb-4 mt-4">
-            <div class="col-2">عنوان</div>
-            <div class="col-2">ساعت</div>
-            <div class="col-3">روز</div>
-            <div class="col-3">تایید مدیر</div>
-            <div class="col-2">حذف</div>
-        </div>
-        <div class="row mb-4 mt-4">
-            {% for gfield in golsa %}
-                <div class="col-2 mb-3 mt-3 p-3"> {{ gfield.title }} </div>
-                <div class="col-2 mb-3 mt-3 p-3"> {{ gfield.hour }} </div>
-                <div class="col-3 mb-3 mt-3 p-3 h-6"> {{ gfield.date }} </div>
-                
-                {% if gfield.admin_approval %}
-                    <div class="col-3 mb-3 mt-3 p-3" style="color: rgb(0, 0, 200);"> تایید شده </div>
-                {% else %}
-                    <div class="col-3 mb-3 mt-3 p-3" style="color: red;"> تایید نشده </div>
-                {% endif %}
-                    
-                <div class="col-2 mb-3 mt-3 p-3"> <a href="{% url 'DELETEARROT' gfield.pk %}" style="color: red;">حذف</a> </div>
-            {% endfor %}
-        </div>
-            
-    </div>
-
-    <div class="row mt-3 mb-3">
-        <p class="text-center mt-5">
-            :پرسش هایی که تا کنون شما برای ما ارسال کرده اید
-        </p>
-        
-        <div class="row mb-5 mt-2">
-            <div class="col-3">عنوان</div>
-            <div class="col-9">متن</div>
+    <div class="container">
+        <div class="row">
+            <div class="col h2 text-center">{{ profile.fullName }}</div>
         </div>
         <div class="row">
-            
-            {% for qfield in questions %}
-                <div class="col-3 mb-2 mt-2"> {{ qfield.title }} </div>
-                <div class="col-9 mb-2 mt-2"> {{ qfield.txt }} </div>
-            {% endfor %}
-                
+            <div class="col h2 text-center">{{ profile.phone }}</div>
         </div>
-            
+        <div class="row">
+            <div class="col">
+                <p class="text-center h1" style="color: red;">
+                    توجه داشته باشید، اگر گزینه حذف را انتخاب کنید، نوبت شما بلافاصله حذف خواهد شد:
+                </p>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <p class="text-center">خدمات مطب آروت بیوتی که تا کنون شما انتخاب کرده اید:</p>
+            <div class="row mb-4 mt-4">
+                <div class="col-2">عنوان</div>
+                <div class="col-2">ساعت</div>
+                <div class="col-3">روز</div>
+                <div class="col-3">تایید مدیر</div>
+                <div class="col-2">حذف</div>
+            </div>
+            <div class="row mb-4 mt-4">
+                {% for afield in arrot %}
+                    <div class="col-2 mb-3 mt-3 p-3">{{ afield.title }}</div>
+                    <div class="col-2 mb-3 mt-3 p-3">{{ afield.hour }}</div>
+                    <div class="col-3 mb-3 mt-3 p-3">{{ afield.date }}</div>
+                    {% if afield.admin_approval %}
+                        <div class="col-3 mb-3 mt-3 p-3" style="color: rgb(0, 200, 0);">تایید شده</div>
+                    {% else %}
+                        <div class="col-3 mb-3 mt-3 p-3" style="color: red;">تایید نشده</div>
+                    {% endif %}
+                    <div class="col-2 mb-3 mt-3 p-3">
+                        <a href="{% url 'DELETEARROT' afield.pk %}" style="color: red;">حذف</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <p class="text-center mt-5">خدمات سالن آروت بیوتی که تا کنون شما انتخاب کرده اید:</p>
+            <div class="row mb-4 mt-4">
+                <div class="col-2">عنوان</div>
+                <div class="col-2">ساعت</div>
+                <div class="col-3">روز</div>
+                <div class="col-3">تایید مدیر</div>
+                <div class="col-2">حذف</div>
+            </div>
+            <div class="row mb-4 mt-4">
+                {% for gfield in golsa %}
+                    <div class="col-2 mb-3 mt-3 p-3">{{ gfield.title }}</div>
+                    <div class="col-2 mb-3 mt-3 p-3">{{ gfield.hour }}</div>
+                    <div class="col-3 mb-3 mt-3 p-3 h-6">{{ gfield.date }}</div>
+                    {% if gfield.admin_approval %}
+                        <div class="col-3 mb-3 mt-3 p-3" style="color: rgb(0, 0, 200);">تایید شده</div>
+                    {% else %}
+                        <div class="col-3 mb-3 mt-3 p-3" style="color: red;">تایید نشده</div>
+                    {% endif %}
+                    <div class="col-2 mb-3 mt-3 p-3">
+                        <a href="{% url 'DELETEARROT' gfield.pk %}" style="color: red;">حذف</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <p class="text-center mt-5">:پرسش هایی که تا کنون شما برای ما ارسال کرده اید</p>
+            <div class="row mb-5 mt-2">
+                <div class="col-3">عنوان</div>
+                <div class="col-9">متن</div>
+            </div>
+            <div class="row">
+                {% for qfield in questions %}
+                    <div class="col-3 mb-2 mt-2">{{ qfield.title }}</div>
+                    <div class="col-9 mb-2 mt-2">{{ qfield.txt }}</div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</div>
-    
 {% endblock doc %}

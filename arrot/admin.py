@@ -2,7 +2,7 @@ from django.contrib import admin
 from django_jalali.admin.filters import JDateFieldListFilter
 import django_jalali.admin as jadmin
 
-from .models import ArrotModel, GolsaModel
+from .models import ArrotModel, GolsaModel, Wallet
 
 
 class ArrotAdmin(admin.ModelAdmin):
@@ -27,6 +27,13 @@ class GolsaAdmin(admin.ModelAdmin):
     search_fields = ('user', 'title')
 
 
+class WalletAdmin(admin.ModelAdmin):
+    list_display = ['user', 'reach_limit']
+    list_filter = ['reach_limit']
+
+
 admin.site.register(ArrotModel, ArrotAdmin)
 
 admin.site.register(GolsaModel, GolsaAdmin)
+
+admin.site.register(Wallet, WalletAdmin)

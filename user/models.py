@@ -76,6 +76,10 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD  = 'phone'
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
+    
+    @property
+    def fullName(self):
+        return str(self.first_name) + " " + str(self.last_name)
 
     def __str__(self):
         return self.email
@@ -97,6 +101,10 @@ class Profile(models.Model):
     phone      = models.CharField(max_length=11, verbose_name='شماره تماس')
     first_name = models.CharField(max_length=30, null=True, blank=True, verbose_name='نام')
     last_name  = models.CharField(max_length=50, null=True, blank=True, verbose_name='نام خانوادگی')
+    
+    @property
+    def fullName(self):
+        return str(self.first_name) + " " + str(self.last_name)
     
     def __str__(self) -> str:
         return f"{self.user} {self.email}"

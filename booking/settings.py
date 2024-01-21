@@ -171,8 +171,11 @@ DATABASES = {
 }
 
 
-# meta tag for Open Graph and SEO
+# TODO : Important for Wallet model
+MAX_LIMIT = 20
 
+
+# meta tag for Open Graph and SEO
 META_SITE_PROTOCOL = 'https'
 META_SITE_DOMAIN = config('META_SITE_DOMAIN')
 META_SITE_NAME = config('META_SITE_NAME')
@@ -182,7 +185,6 @@ META_OG_NAMESPACES = []
 
 
 # TODO : uncomment these lines after https goes live
-
 # SECURE_SSL_REDIRECT = True
 # SESSION_COOKIE_SECURE = True
 # SECURE_BROWSER_XSS_FILTER = True
