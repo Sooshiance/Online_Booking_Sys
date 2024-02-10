@@ -56,6 +56,7 @@ def registerUser(request):
             last_name = form.cleaned_data['last_name']
             user = User.objects.create_user(email=email, password=password,first_name=first_name,
                                             last_name=last_name, phone=phone)
+            user.set_password(password)
             user.save()
             messages.success(request, 'اطلاعات شما با موفقیت ثبت گردید')
             return redirect('HOME')

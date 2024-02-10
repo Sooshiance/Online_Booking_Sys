@@ -15,8 +15,7 @@
         <label for="text">عنوان</label>
         {{ form.title }}
         <label for="date">روز</label>
-        {% load jformat %}
-        {{ form.date|jformat }}
+        {{ form.date }}
         <label for="">ساعت</label>
         {{ form.hour }}
         <label for="">توضیحات</label>

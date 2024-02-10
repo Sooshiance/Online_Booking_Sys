@@ -3,3 +3,4 @@ penv
 TODO.md
 __pycache__
 migrations
+db.sqlite3
