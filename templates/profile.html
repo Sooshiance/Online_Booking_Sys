@@ -1,6 +1,6 @@
 {% extends 'root.html' %}
 {% block title %}
-    پروفایل {{ profile.username }}
+    پروفایل {{ profile.fullName }}
 {% endblock title %}
 {% block doc %}
     <div class="container">
@@ -62,7 +62,7 @@
                         <div class="col-3 mb-3 mt-3 p-3" style="color: red;">تایید نشده</div>
                     {% endif %}
                     <div class="col-2 mb-3 mt-3 p-3">
-                        <a href="{% url 'DELETEARROT' gfield.pk %}" style="color: red;">حذف</a>
+                        <a href="{% url 'DELETEGOLSA' gfield.pk %}" style="color: red;">حذف</a>
                     </div>
                 {% endfor %}
             </div>
@@ -79,6 +79,10 @@
                     <div class="col-9 mb-2 mt-2">{{ qfield.txt }}</div>
                 {% endfor %}
             </div>
+        </div>
+        <div class="row mb-5 mt-5">
+            <p class="text-center mt-5">میزان شارژ شده کیف پول شما</p>
+            <div class="col-12 text-center"> {{ wallet.reach_limit }} </div>
         </div>
     </div>
 {% endblock doc %}

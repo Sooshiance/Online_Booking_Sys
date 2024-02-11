@@ -14,19 +14,3 @@ def update_wallet(sender, instance, created, **kwargs):
 post_save.connect(update_wallet, sender=ArrotModel)
 
 post_save.connect(update_wallet, sender=GolsaModel)
-
-
-######################### Delete from Wallet #########################
-
-
-def delete_wallet(sender, instance, created, **kwargs):
-    if created:
-        user = instance.t.user 
-        wallet = Wallet.objects.get(user=user)
-        wallet.reach_limit = wallet.reach_limit - 1
-        wallet.save()
-
-
-post_delete.connect(delete_wallet, sender=ArrotModel)
-    
-post_delete.connect(delete_wallet, sender=GolsaModel)

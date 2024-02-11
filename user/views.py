@@ -6,7 +6,7 @@ from django.utils.http import urlsafe_base64_decode
 from .models import User, Profile
 from .forms import RegisterUser
 from .utils import passwordResetEmail
-from arrot.models import ArrotModel, GolsaModel
+from arrot.models import ArrotModel, GolsaModel, Wallet
 from question.models import Question
 
 
@@ -77,10 +77,13 @@ def userProfile(request):
         arrot_reserved = ArrotModel.objects.filter(user__exact=request.user)
         golsa_reserved = GolsaModel.objects.filter(user__exact=request.user)
         asked = Question.objects.all().filter(user__exact=request.user)
+        wallet = Wallet.objects.get(user=request.user)
+        print(wallet.reach_limit)
         context = {'profile':prof,
                    'arrot':arrot_reserved,
                    'golsa':golsa_reserved,
-                   'questions':asked}
+                   'questions':asked,
+                   'wallet':wallet,}
         return render(request, 'profile.html', context=context)
     else:
         messages.info(request, 'لطفا وارد شوید')
@@ -91,6 +94,10 @@ def deleteArrotItem(request, pk):
     if request.user.is_authenticated:
         t = ArrotModel.objects.get(pk=pk)
         t.delete()
+        user = t.user         
+        w = Wallet.objects.get(user=user)
+        w.remove_turn()
+        print(w.reach_limit)        
         messages.success(request, 'نوبت انتخابی شما، با موفقیت حذف شد')
         return redirect('PROFILE')
     else:
@@ -100,8 +107,12 @@ def deleteArrotItem(request, pk):
 
 def deleteGolsaItem(request, pk):
     if request.user.is_authenticated:
-        t = GolsaModel.objects.get(pk=pk)
-        t.delete()
+        g = GolsaModel.objects.get(pk=pk)
+        g.delete()
+        user = g.user         
+        w = Wallet.objects.get(user=user)
+        w.remove_turn()
+        print(w.reach_limit)  
         messages.success(request, 'نوبت انتخابی شما، با موفقیت حذف شد')
         return redirect('PROFILE')
     else:

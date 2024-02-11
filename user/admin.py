@@ -7,7 +7,7 @@ from .models import User, Profile
 
 
 class Admin(UserAdmin):
-    list_display = ('phone', 'email', 'is_active', 'pk', 'joined_at')
+    list_display = ('phone', 'fullName', 'email', 'is_active', 'pk', 'joined_at')
     filter_horizontal = ()
     list_filter = (('joined_at', JDateFieldListFilter), 'is_active')
     fieldsets = ()
