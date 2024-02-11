@@ -1,17 +1,16 @@
 # This is the Arrot Beauty Club.
 
-# It's so called 'Reservation System' with benefits like :
-
-## Choose date and time for Services 
-## Validators for specific date (IRAN day off : Friday has been disable to choose)
-## Blog section for user comment about their experience of Aroot Beauty
-## Question section for users to ensure from the services
-## Full Authentication cycle
-## Mobile verification via OTP
-## Reset password with Email
-## Reset password with OTP
-## RSS feeds for better indexing 
-## Meta third-party for SEO and Ranking
+## It's so called 'Reservation System' with benefits like :
+- Choose date and time for Services 
+- Validators for specific date (IRAN day off : Friday has been disable to choose)
+- Blog section for user comment about their experience of Aroot Beauty
+- Question section for users to ensure from the services
+- Full Authentication cycle
+- Mobile verification via OTP
+- Reset password with Email
+- Reset password with OTP
+- RSS feeds for better indexing 
+- Meta third-party for SEO and Ranking
 
 If you found any bug or better solution for a 
 Reservation system like this, send a comment for me.
