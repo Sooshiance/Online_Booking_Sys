@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load meta %}
+{% load jalali_tags %}
 <html lang="fa-ir" dir="rtl">
   <head>
     {% include "meta/meta.html" %}
@@ -35,6 +36,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
     <!-- =======================================================
   * Template Name: Medilab
   * Updated: Jun 23 2023 with Bootstrap v5.3.0
@@ -189,5 +192,7 @@ for (i = 0; i < acc.length; i++) {
   });
 }
     </script>
+    <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
+		<script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
   </body>
 </html>

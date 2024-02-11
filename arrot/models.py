@@ -41,11 +41,11 @@ HOURS = (
 
 
 class ArrotModel(models.Model):
-    objects        = jmodels.jManager()
+    # objects        = jmodels.jManager()
     user           = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     title          = models.TextField(choices=ARROT_SERVICES, verbose_name='نام خدمات')
     hour           = models.CharField(max_length=5, choices=HOURS, verbose_name='زمان انتخابی')
-    date           = jmodels.jDateField(validators=[passedDays, noFriday], verbose_name='روز انتخابی')
+    date           = models.DateField(validators=[passedDays, noFriday], verbose_name='روز انتخابی')
     description    = models.TextField(null=True, blank=True, verbose_name='توضیحات کوتاه')
     admin_approval = models.BooleanField(default=False, verbose_name='تایید مدیر')
     created_at     = jmodels.jDateTimeField(auto_now_add=True, verbose_name='ایجاد شده در')
@@ -60,11 +60,11 @@ class ArrotModel(models.Model):
 
 
 class GolsaModel(models.Model):
-    objects        = jmodels.jManager()
+    # objects        = jmodels.jManager()
     user           = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     title          = models.TextField(choices=GOLSA_SERVICES, verbose_name='نام خدمات')
     hour           = models.CharField(max_length=5, choices=HOURS, verbose_name='زمان انتخابی')
-    date           = jmodels.jDateField(validators=[passedDays, noFriday], verbose_name='روز انتخابی')
+    date           = models.DateField(validators=[passedDays, noFriday], verbose_name='روز انتخابی')
     description    = models.TextField(null=True, blank=True, verbose_name='توضیح کوتاه')
     admin_approval = models.BooleanField(default=False, verbose_name='تایید مدیر')
     created_at     = jmodels.jDateTimeField(auto_now_add=True, verbose_name='ایجاد شده در')

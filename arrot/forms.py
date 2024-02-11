@@ -1,6 +1,8 @@
 from django import forms 
-from django_jalali.forms.widgets import jDateInput
 from django.core.exceptions import ValidationError
+
+from jalali_date.fields import JalaliDateField
+from jalali_date.widgets import AdminJalaliDateWidget
 
 from .models import ArrotModel, GolsaModel
 
@@ -8,13 +10,18 @@ from .models import ArrotModel, GolsaModel
 class ClinicReserve(forms.ModelForm):
     class Meta:
         model = ArrotModel
-        fields = ['title', 'date', 'hour', 'description']
+        fields = ("title", "date", "hour", "decription")
         widgets = {
             'title': forms.Select(attrs={'class':'form-control my-5'}),
-            'date': jDateInput(attrs={'class': 'form-control my-5'}),
+            # 'date': forms.DateInput(attrs={'class': 'form-control my-5'}),
             'hour': forms.Select(attrs={'class':'form-control my-5'}),
             'description': forms.Textarea(attrs={'class':'form-control my-5'}),
         }
+    def __init__(self, *args, **kwargs):
+        super(ClinicReserve, self).__init__(*args, **kwargs)
+        self.fields['date'] = JalaliDateField(label='روز', # date format is  "yyyy-mm-dd"
+            widget=AdminJalaliDateWidget # optional, to use default datepicker
+        )
     def clean(self):
         cleaned_data = super().clean()
         date = cleaned_data.get('date')
@@ -30,13 +37,18 @@ class ClinicReserve(forms.ModelForm):
 class SalonReserve(forms.ModelForm):
     class Meta:
         model = GolsaModel
-        fields = ['title', 'date', 'hour', 'description']
+        fields = ("title", "date", "hour", "decription")
         widgets = {
             'title': forms.Select(attrs={'class':'form-control my-5'}),
-            'date': jDateInput(attrs={'class': 'form-control my-5'}),
+            # 'date': jDateInput(attrs={'class': 'form-control my-5'}),
             'hour': forms.Select(attrs={'class':'form-control my-5'}),
             'description': forms.Textarea(attrs={'class':'form-control my-5'}),
         }
+    def __init__(self, *args, **kwargs):
+        super(SalonReserve, self).__init__(*args, **kwargs)
+        self.fields['date'] = JalaliDateField(label='date', # date format is  "yyyy-mm-dd"
+            widget=AdminJalaliDateWidget # optional, to use default datepicker
+        )
     def clean(self):
         cleaned_data = super().clean()
         date = cleaned_data.get('date')

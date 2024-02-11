@@ -1,27 +1,31 @@
 from django.contrib import admin
 
-from django_jalali.admin.filters import JDateFieldListFilter
-import django_jalali.admin as jadmin
+from jalali_date import datetime2jalali, date2jalali
+from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin	
 
 from .models import ArrotModel, GolsaModel, Wallet
 
 
-class ArrotAdmin(admin.ModelAdmin):
+class MyInlines1(TabularInlineJalaliMixin, admin.TabularInline):
+	model = ArrotModel
+
+
+class MyInlines1(TabularInlineJalaliMixin, admin.TabularInline):
+	model = GolsaModel
+
+
+class ArrotAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
     list_display = ('user', 'title', 'hour', 'admin_approval', 'pk')
-    list_filter = (('date', JDateFieldListFilter),
-                    ('created_at', JDateFieldListFilter),
-                    'admin_approval',)
+    list_filter = ('admin_approval',)
     sortable_by = ('created_at', 'title')
     readonly_fields = ('created_at', 'updated_at')
     list_display_links = ('user', 'title', 'pk')
     search_fields = ('user', 'title')
 
 
-class GolsaAdmin(admin.ModelAdmin):
+class GolsaAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
     list_display = ('user', 'title', 'hour', 'admin_approval', 'pk')
-    list_filter = (('date', JDateFieldListFilter),
-                    ('created_at', JDateFieldListFilter),
-                    'admin_approval',)
+    list_filter = ('admin_approval',)
     sortable_by = ('created_at', 'title')
     readonly_fields = ('created_at', 'updated_at')
     list_display_links = ('user', 'title', 'pk')

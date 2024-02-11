@@ -12,16 +12,11 @@
     </div>
     <form action="{% url 'CLINIC' %}" method="post">
         {% csrf_token %}
-        <label for="text">عنوان</label>
-        {{ form.title }}
-        <label for="date">روز</label>
-        {{ form.date }}
-        <label for="">ساعت</label>
-        {{ form.hour }}
-        <label for="">توضیحات</label>
-        {{ form.description }}
+        {{ form.as_p }}
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">دریافت</button>
         </div>
     </form>
+    <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
+	<script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
 {% endblock doc %}
