@@ -35,6 +35,7 @@ class AllService(ModelMeta, models.Model):
     price         = models.CharField(max_length=12, validators=[numbers], verbose_name='هزینه', help_text='هزینه')
     service_cover = models.ImageField(upload_to='service/pic/', null=True, blank=True, verbose_name='تصویر')
     alt_cover     = models.ImageField(upload_to='service/alt/', null=True, blank=True, verbose_name='جایگزین تصویر')
+    is_available  = models.BooleanField(default=True, verbose_name='در دسترس')
     
     _metadata = {
         'title': 'title',
@@ -43,7 +44,7 @@ class AllService(ModelMeta, models.Model):
     }
     
     def __str__(self) -> str:
-        return f"{self.category} {self.title}"
+        return f"{self.category} {self.title} {self.is_available}"
     
     class Meta:
         ordering = ['-created_at']

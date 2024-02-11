@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    # TODO : Change the admin url to something else
+    # TODO : Change the admin url path to something else
     path('admin/', admin.site.urls),
     
     path('', include('service.urls')),

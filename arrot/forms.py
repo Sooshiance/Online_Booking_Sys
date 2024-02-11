@@ -46,7 +46,7 @@ class SalonReserve(forms.ModelForm):
         }
     def __init__(self, *args, **kwargs):
         super(SalonReserve, self).__init__(*args, **kwargs)
-        self.fields['date'] = JalaliDateField(label='date', # date format is  "yyyy-mm-dd"
+        self.fields['date'] = JalaliDateField(label='روز', # date format is  "yyyy-mm-dd"
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
     def clean(self):

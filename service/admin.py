@@ -13,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class AllServiceAdmin(admin.ModelAdmin):
     list_display = ('category', 'title', 'pk',)
-    list_filter = (('created_at', JDateFieldListFilter),)
+    list_filter = (('created_at', JDateFieldListFilter), 'is_available')
     prepopulated_fields = {'slug': ('title',)}
     sortable_by = ('title', 'created_ate', 'price')
     search_fields = ('title', 'slug')

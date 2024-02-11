@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
+from django.http import HttpResponseNotAllowed
 from django.utils.timezone import datetime
 
 from .models import User, Profile
@@ -127,12 +128,12 @@ def otpRegisterValidation(request):
 
 def userProfile(request):
     if request.user.is_authenticated:
+        user = request.user 
         prof = Profile.objects.get(user=request.user)
         arrot_reserved = ArrotModel.objects.filter(user__exact=request.user)
         golsa_reserved = GolsaModel.objects.filter(user__exact=request.user)
         asked = Question.objects.all().filter(user__exact=request.user)
-        wallet = Wallet.objects.get(user=request.user)
-        print(wallet.reach_limit)
+        wallet = Wallet.objects.get(user=user) or None 
         context = {'profile':prof,
                    'arrot':arrot_reserved,
                    'golsa':golsa_reserved,
@@ -306,3 +307,17 @@ def confirmResetPassowrd(request):
             messages.error(request, "")
             return redirect("CONFIRM")
     return render(request, "confirm_password.html")
+
+
+########################## Admin panel ##########################
+
+
+def adminPrivileges(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser == True:
+            w = Wallet.objects.all().filter(reach_limit=20)
+            return render(request, 'admin_panel.html', {"users_reach_limit":w})
+        else:
+            return HttpResponseNotAllowed("you are not superuser!")
+    else:
+        return redirect('LOGIN')

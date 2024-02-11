@@ -10,7 +10,7 @@ def passedDays(date):
 
 
 def noFriday(date):
-    if date.weekday() == 6:
+    if date.weekday() == 4:
         raise ValidationError("این روز تعطیل میباشد")
     else:
         return date

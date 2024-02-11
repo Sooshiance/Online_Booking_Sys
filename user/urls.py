@@ -13,7 +13,7 @@ urlpatterns = [
     path('register/', registerUser, name='REGISTER'),
     path('register/otp/', otpRegisterValidation, name='OTP-REGISTER'),
     
-    # TODO : Control reserved turns
+    # TODO : Users control their reserved turns 
     path('delete-arrot/<int:pk>/', deleteArrotItem, name='DELETEARROT'),
     path('delete-golsa/<int:pk>/', deleteGolsaItem, name='DELETEGOLSA'),
     
@@ -26,4 +26,7 @@ urlpatterns = [
     path('otp/forgetpassword/', otpResetPassword, name='OTP-FORGET'),
     path('otp/check/', checkOTP, name='OTP-RESET'),
     path('otp/reset-link/', confirmResetPassowrd, name='OTP-CONFIRM'),
+    
+    # TODO : Admin checks the users who reached at maximum mount in their Wallet
+    path('users/wallet/', adminPrivileges),
 ]

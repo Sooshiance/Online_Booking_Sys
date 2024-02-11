@@ -1,0 +1,24 @@
+{% extends "root.html" %}
+
+{% block title %}
+صفحه ادمین
+{% endblock title %}
+
+{% block doc %}
+<div class="container">
+    <div class="row">
+        
+        {% for obj in users_reach_limit %}
+
+            <div class="col-6 h1">
+                {{ obj.user.fullName }}
+            </div>
+            <div class="col-6 h1">
+                {{ obj.user.phone }}
+            </div>
+            
+        {% endfor %}
+            
+    </div>
+</div>
+{% endblock doc %}

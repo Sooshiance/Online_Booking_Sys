@@ -13,7 +13,7 @@ def home(request):
         form = Paper(request.POST)
         if form.is_valid():
             email = request.POST.get('email')
-            person = Letter(email=email)
+            person = Letter.objects.create(email=email)
             person.save()
             messages.success(request, 'با سپاس از مشارکت شما')
             return redirect('HOME')
