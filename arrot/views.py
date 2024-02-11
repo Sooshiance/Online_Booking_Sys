@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from .models import ArrotModel, GolsaModel, Wallet
+from .models import ArrotModel, GolsaModel
 from .forms import ClinicReserve, SalonReserve
 
 
@@ -20,12 +20,7 @@ def reserveClinicView(request):
                 description = form.cleaned_data['description']
                 
                 object = ArrotModel.objects.create(title=title, date=date, hour=hour, description=description,
-                                                    user=request.user)
-                if Wallet.objects.exists(user=request.user):
-                    pass
-                else:
-                    Wallet.objects.create(user=request.user).save()
-                object.save()
+                                                    user=request.user)                
                 messages.success(request, 'نوبت شما با موفقیت ذخیره شد')
                 return redirect('RESERVED')
             else:
@@ -52,11 +47,7 @@ def reserveSalonView(request):
                 
                 object = GolsaModel.objects.create(title=title, date=date, hour=hour, description=description,
                                                     user=request.user)
-                if Wallet.objects.exists(user=request.user):
-                    pass
-                else:
-                    Wallet.objects.create(user=request.user).save()
-                object.save()
+                                
                 messages.success(request, 'نوبت شما با موفقیت ذخیره شد')
                 return redirect('RESERVED')
             else:
