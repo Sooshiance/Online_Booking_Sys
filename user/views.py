@@ -1,11 +1,16 @@
+import pyotp
+
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
+from django.utils.timezone import datetime
 
 from .models import User, Profile
-from .forms import RegisterUser
+from .forms import RegisterUser, OTPForm
 from .utils import passwordResetEmail
+from .otp import sendToken
+
 from arrot.models import ArrotModel, GolsaModel, Wallet
 from question.models import Question
 
@@ -57,7 +62,10 @@ def registerUser(request):
             user = User.objects.create_user(email=email, password=password,first_name=first_name,
                                             last_name=last_name, phone=phone)
             user.set_password(password)
+            user.is_active = False
             user.save()
+            request.session["pk"] = user.pk
+            sendToken(request=request)
             messages.success(request, 'اطلاعات شما با موفقیت ثبت گردید')
             return redirect('HOME')
         else:
@@ -66,6 +74,52 @@ def registerUser(request):
     else:
         form = RegisterUser()
     return render(request, "signup.html", {'form': form})
+
+
+def otpRegisterValidation(request):
+    form = OTPForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            otp = form.cleaned_data.get("otp")
+            pk = request.session["pk"]
+            otp_secret_key = request.session["otp_secret_key"]
+            otp_valid_until = request.session["otp_valid_date"]
+            
+            if otp_secret_key and otp_valid_until:
+                valid_until = datetime.fromisoformat(otp_valid_until)
+                
+                if valid_until > datetime.now():
+                    totp = pyotp.TOTP(otp_secret_key, interval=180)
+                    
+                    if totp.verify(otp):
+                        print(pk)
+                        user = User.objects.get(pk=pk)
+                        
+                        user.is_active = True
+                        
+                        user.save()
+
+                        del request.session["otp_secret_key"]
+                        del request.session["otp_valid_date"]
+                        
+                        messages.success(request, '')
+                        
+                        return redirect('HOME')
+                    
+                    else:
+                        messages.error(request, 'otp is used before or expired')
+                        return redirect('OTP-REGISTER-VERIFY')
+                else:
+                    messages.error(request, 'otp time has passed')
+                    return redirect('OTP-REGISTER-VERIFY')
+            else:
+                messages.error(request, 'the OTP is not acceptable')
+                return redirect('REGISTER')
+            
+        else:
+            messages.error(request, '')
+            return redirect('REGISTER')
+    return render(request, 'otp_register.html', {'form':form})
 
 
 ########################## Profile Page Section ##########################
@@ -120,7 +174,7 @@ def deleteGolsaItem(request, pk):
         return redirect('LOGIN')
 
 
-########################## Password Reset Section ##########################
+########################## Password Reset via Email Section ##########################
 
 
 def forgetPassword(request):
@@ -176,3 +230,79 @@ def confirmResetting(request):
             messages.error(request, 'گذر واژه های داده شده همخوانی ندارند، دوباره تلاش کنید')
             return redirect('CONFIRM')
     return render(request, 'confirm_password.html')
+
+
+########################## Password Reset via OTP Section ##########################
+
+
+def otpResetPassword(request):
+    if request.method == "POST":
+        phone = request.POST.get("phone")
+        if User.objects.filter(phone__exact=phone):
+            user = User.objects.get(phone=phone)
+            request.session["pk"] = user.pk
+            sendToken(request=request)
+            messages.success(request, "")
+            return redirect('RESET')
+        else:
+            messages.error(request, "")
+            return redirect("FORGET")
+    return render(request, "forgetPassowrd.html")
+
+
+def checkOTP(request):
+    form = OTPForm(request.POST, None)
+    if request.method == 'POST':
+        if form.is_valid():
+            otp = form.cleaned_data.get("otp")
+            otp_secret_key = request.session["otp_secret_key"]
+            otp_valid_until = request.session["otp_valid_date"]
+            
+            if otp_secret_key and otp_valid_until:
+                valid_until = datetime.fromisoformat(otp_valid_until)
+                
+                if valid_until > datetime.now():
+                    totp = pyotp.TOTP(otp_secret_key, interval=180)
+                    
+                    if totp.verify(otp):
+                        messages.success(request, "")
+
+                        del request.session["otp_secret_key"]
+                        del request.session["otp_valid_date"]
+                        
+                        return redirect("CONFIRM")
+                    else:
+                        messages.error(request, 'otp is used before or expired')
+                        return redirect('RESET')
+                else:
+                    messages.error(request, 'otp time has passed')
+                    return redirect('FORGET')
+            else:
+                messages.error(request, 'the OTP is not acceptable')
+                return redirect('FORGET')
+        else:
+            messages.error(request, "")
+            return redirect("FORGET")
+    return render(request, "otp_reset_password.html", {"form":form})
+
+
+def confirmResetPassowrd(request):
+    if request.user.is_authenticated:
+        messages.warning(request, 'شما نمیتوانید به این صفحه مراجعه کنید')
+        return redirect('HOME')
+    elif request.method == "POST":
+        password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
+        
+        if password == confirm_password:
+            pk = request.session.get("pk")
+            user = User.objects.get(pk=pk)
+            user.set_password(password)
+            user.is_active = True
+            user.save()
+            messages.success(request, 'گذر واژه با موفقیت بازیابی شد')
+            return redirect('LOGIN')
+        else:
+            messages.error(request, "")
+            return redirect("CONFIRM")
+    return render(request, "confirm_password.html")

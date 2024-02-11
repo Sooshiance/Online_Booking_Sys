@@ -17,3 +17,7 @@ class RegisterUser(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class':'form-control my-5', 'placeholder':'Ali'}),
             'last_name': forms.TextInput(attrs={'class':'form-control my-5', 'placeholder':'alizadeh'}),
         }
+
+
+class OTPForm(forms.Form):
+    otp = forms.CharField(label="OTP", max_length=6)

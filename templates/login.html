@@ -24,11 +24,12 @@
                     <label for="password" class="form-label ">گذر واژه</label>
                     <input type="password" name="password" class="form-control" id="password" placeholder="*******">
                   </div>
-                  {% csrf_token %}
-                  <p class="small text-center">اگر گذر واژه خود را فراموش کردید آنرا<a class="text-center" href="{% url 'FORGET' %}"> بازیابی کنید </a></p>
-                  <div class="d-grid">
+                  <div class="d-grid mb-3 mt-3">
                     <button class="btn btn-outline-dark" type="submit">وارد شدن</button>
                   </div>
+                  {% csrf_token %}
+                  <p class="small text-center mt-3 mb-3"> بازیابی رمز عبور با<a class="text-center" href="{% url 'FORGET' %}"> پست الکترونیکی </a></p>
+                  <p class="small text-center mt-3 mb-3"> بازیابی رمز عبور با<a class="text-center" href="{% url 'OTP-FORGET' %}"> شماره همراه </a></p>                  
                 </form>
                 <div>
                   <p class="mb-0  text-center">

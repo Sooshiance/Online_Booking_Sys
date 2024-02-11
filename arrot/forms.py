@@ -10,7 +10,7 @@ from .models import ArrotModel, GolsaModel
 class ClinicReserve(forms.ModelForm):
     class Meta:
         model = ArrotModel
-        fields = ("title", "date", "hour", "decription")
+        fields = ("title", "date", "hour", "description")
         widgets = {
             'title': forms.Select(attrs={'class':'form-control my-5'}),
             # 'date': forms.DateInput(attrs={'class': 'form-control my-5'}),
@@ -37,7 +37,7 @@ class ClinicReserve(forms.ModelForm):
 class SalonReserve(forms.ModelForm):
     class Meta:
         model = GolsaModel
-        fields = ("title", "date", "hour", "decription")
+        fields = ("title", "date", "hour", "description")
         widgets = {
             'title': forms.Select(attrs={'class':'form-control my-5'}),
             # 'date': jDateInput(attrs={'class': 'form-control my-5'}),
