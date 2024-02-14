@@ -68,7 +68,7 @@ class User(AbstractBaseUser):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', message='فقط نمادهای الفبایی و اعداد پذیرفته میشوند')
     numbers      = RegexValidator(r'^[0-9a]*$', message='تنها اعداد پذیرفته میشوند')
     phone        = models.CharField(max_length=11, unique=True, validators=[numbers], verbose_name='شماره تماس', help_text='این فیلد برای احراز هویت استفاده میشود، در انتخاب آن دقت کنید')
-    username     = models.CharField(max_length=11, unique=True, verbose_name='نام کاربری', help_text='این فیلد برای احراز هویت استفاده میشود، در انتخاب آن دقت کنید')
+    username     = models.CharField(max_length=11, unique=True, verbose_name='نام کاربری')
     email        = models.EmailField(verbose_name='پست الکترونیکی', unique=True, max_length=244, help_text='این فیلد الزامی میباشد')
     first_name   = models.CharField(max_length=30, null=True, blank=True, verbose_name='نام', help_text='این فیلد الزامی میباشد')
     last_name    = models.CharField(max_length=50, null=True, blank=True, verbose_name='نام خانوادگی', help_text='این فیلد الزامی میباشد')

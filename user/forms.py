@@ -6,7 +6,7 @@ from .models import User
 class RegisterUser(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'password', 'first_name', 'last_name', 'phone']
+        fields = ['phone', 'email', 'username', 'password', 'first_name', 'last_name']
         labels = {
             'password': 'گذر واژه',
         }

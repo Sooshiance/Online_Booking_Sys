@@ -6,7 +6,7 @@ from .forms import ClinicReserve, SalonReserve
 
 
 def reserveLink(request):
-    return render(request, "reservation.html")
+    return render(request, "arrot/reservation.html")
 
 
 def reserveClinicView(request):
@@ -26,10 +26,10 @@ def reserveClinicView(request):
             else:
                 messages.error(request, f'{form.errors}')
                 form = ClinicReserve()
-                return render(request, 'clinic.html', {'form': form})
+                return render(request, 'arrot/clinic.html', {'form': form})
         else:
             form = ClinicReserve()
-        return render(request, 'clinic.html', {'form':form})
+        return render(request, 'arrot/clinic.html', {'form':form})
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')
@@ -53,10 +53,10 @@ def reserveSalonView(request):
             else:
                 messages.error(request, f"{form.errors}")
                 form = SalonReserve()
-                return render(request, 'salon.html', {'form': form})
+                return render(request, 'arrot/salon.html', {'form': form})
         else:
             form = SalonReserve()
-            return render(request, 'salon.html', {'form':form})
+            return render(request, 'arrot/salon.html', {'form':form})
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')

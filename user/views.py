@@ -17,7 +17,7 @@ from arrot.models import ArrotModel, GolsaModel, Wallet
 from question.models import Question
 
 
-########################## Settings important config
+########################## Settings important config ##########################
 
 
 Max_Limit = settings.MAX_LIMIT
@@ -42,8 +42,8 @@ def loginUser(request):
             return redirect('HOME')
         else:
             messages.error(request, 'مشخصات وارد شده اشتباه می باشد، دوباره تلاش کنید')
-            return render(request, 'login.html')
-    return render(request, "login.html")
+            return render(request, 'user/login.html')
+    return render(request, "user/login.html")
 
 
 def logoutUser(request):
@@ -76,13 +76,13 @@ def registerUser(request):
             request.session["pk"] = user.pk
             sendToken(request=request, phone=phone)
             messages.success(request, 'اطلاعات شما با موفقیت ثبت گردید')
-            return redirect('HOME')
+            return redirect('OTP-REGISTER')
         else:
             messages.error(request, f'{form.errors}')
             return redirect('REGISTER')
     else:
         form = RegisterUser()
-    return render(request, "signup.html", {'form': form})
+    return render(request, "user/signup.html", {'form': form})
 
 
 def otpRegisterValidation(request):
@@ -128,7 +128,7 @@ def otpRegisterValidation(request):
         else:
             messages.error(request, '')
             return redirect('REGISTER')
-    return render(request, 'otp_register.html', {'form':form})
+    return render(request, 'user/otp_register.html', {'form':form})
 
 
 ########################## Profile Page Section ##########################
@@ -140,14 +140,19 @@ def userProfile(request):
         prof = Profile.objects.get(user=request.user)
         arrot_reserved = ArrotModel.objects.filter(user__exact=request.user)
         golsa_reserved = GolsaModel.objects.filter(user__exact=request.user)
-        asked = Question.objects.all().filter(user__exact=request.user)
-        wallet = Wallet.objects.get(user=user) or None 
+        asked = Question.objects.all().filter(user__exact=request.user)           
+        try:
+            w = Wallet.objects.get(user=user)
+        except:
+            w = None
+        wallet=w 
+        print(wallet)
         context = {'profile':prof,
                    'arrot':arrot_reserved,
                    'golsa':golsa_reserved,
                    'questions':asked,
                    'wallet':wallet,}
-        return render(request, 'profile.html', context=context)
+        return render(request, 'user/profile.html', context=context)
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')
@@ -200,7 +205,7 @@ def forgetPassword(request):
         else:
             messages.error(request, 'پست الکترونیکی داده شده اشتباه می باشد')
             return redirect('FORGET')
-    return render(request, 'forget_password.html')
+    return render(request, 'user/forget_password.html')
 
 
 def resetLink(request, uidb64, token):
@@ -238,7 +243,7 @@ def confirmResetting(request):
         else:
             messages.error(request, 'گذر واژه های داده شده همخوانی ندارند، دوباره تلاش کنید')
             return redirect('CONFIRM')
-    return render(request, 'confirm_password.html')
+    return render(request, 'user/confirm_password.html')
 
 
 ########################## Password Reset via OTP Section ##########################
@@ -252,11 +257,11 @@ def otpResetPassword(request):
             request.session["pk"] = user.pk
             sendToken(request=request, phone=phone)
             messages.success(request, "")
-            return redirect('RESET')
+            return redirect('OTP-RESET')
         else:
             messages.error(request, "")
             return redirect("FORGET")
-    return render(request, "forgetPassowrd.html")
+    return render(request, "user/forgetPassowrd.html")
 
 
 def checkOTP(request):
@@ -279,10 +284,10 @@ def checkOTP(request):
                         del request.session["otp_secret_key"]
                         del request.session["otp_valid_date"]
                         
-                        return redirect("CONFIRM")
+                        return redirect("OTP-CONFIRM")
                     else:
                         messages.error(request, 'otp is used before or expired')
-                        return redirect('RESET')
+                        return redirect('OTP-RESET')
                 else:
                     messages.error(request, 'otp time has passed')
                     return redirect('FORGET')
@@ -292,7 +297,7 @@ def checkOTP(request):
         else:
             messages.error(request, "")
             return redirect("FORGET")
-    return render(request, "otp_reset_password.html", {"form":form})
+    return render(request, "user/otp_password.html", {"form":form})
 
 
 def confirmResetPassowrd(request):
@@ -300,12 +305,12 @@ def confirmResetPassowrd(request):
         messages.warning(request, 'شما نمیتوانید به این صفحه مراجعه کنید')
         return redirect('HOME')
     elif request.method == "POST":
+        pk = request.session.get("pk")
+        user = User.objects.get(pk=pk)
         password = request.POST.get("password")
         confirm_password = request.POST.get("confirm_password")
         
-        if password == confirm_password:
-            pk = request.session.get("pk")
-            user = User.objects.get(pk=pk)
+        if password == confirm_password:            
             user.set_password(password)
             user.is_active = True
             user.save()
@@ -313,8 +318,8 @@ def confirmResetPassowrd(request):
             return redirect('LOGIN')
         else:
             messages.error(request, "")
-            return redirect("CONFIRM")
-    return render(request, "confirm_password.html")
+            return redirect("OTP-CONFIRM")
+    return render(request, "user/otp_confirm_password.html")
 
 
 ########################## Admin panel ##########################
@@ -324,7 +329,7 @@ def adminPrivileges(request):
     if request.user.is_authenticated:
         if request.user.is_superuser == True:
             w = Wallet.objects.all().filter(reach_limit=Max_Limit)
-            return render(request, 'admin_panel.html', {"users_reach_limit":w})
+            return render(request, 'user/admin_panel.html', {"users_reach_limit":w})
         else:
             return HttpResponseNotAllowed("you are not superuser!")
     else:

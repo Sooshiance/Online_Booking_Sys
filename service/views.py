@@ -22,14 +22,14 @@ def home(request):
             return redirect('HOME')
     else:
         form = Paper()
-    return render(request, "index.html", {'category':cat, 'services': serv, 'form':form})
+    return render(request, "service/index.html", {'category':cat, 'services': serv, 'form':form})
 
 
 def eachCategory(request, slug):
     try:
         cat = Category.objects.get(slug=slug)
         serv = AllService.objects.filter(category__slug=slug)
-        return render(request, "each_category.html", {'category':cat, 'services':serv})
+        return render(request, "service/each_category.html", {'category':cat, 'services':serv})
     except:
         return HttpResponseNotFound(content="صفحه مورد نظر یافت نشد")
 
@@ -37,7 +37,7 @@ def eachCategory(request, slug):
 def allService(request):
     try :
         serv = AllService.objects.all()
-        return render(request, "allservice.html", {'services': serv})
+        return render(request, "service/allservice.html", {'services': serv})
     except:
         return HttpResponseNotFound(content="صفحه مورد نظر یافت نشد")
 
@@ -45,6 +45,6 @@ def allService(request):
 def eachService(request, slug):
     try : 
         serv = AllService.objects.get(slug=slug)
-        return render(request, "service.html", {'service':serv})
+        return render(request, "service/service.html", {'service':serv})
     except:
         return HttpResponseNotFound(content="صفحه مورد نظر یافت نشد")

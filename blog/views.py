@@ -7,7 +7,7 @@ from .forms import CommentForm
 
 def showComment(request):
     c = Post.objects.all().filter(admin_approval=True)
-    return render(request, 'showcomment.html', {'comments':c})
+    return render(request, 'blog/showcomment.html', {'comments':c})
 
 
 def shareComment(request):
@@ -27,7 +27,7 @@ def shareComment(request):
                 return redirect('SHARE')
         else:
             form = CommentForm()
-        return render(request, 'comment.html', {'form':form})
+        return render(request, 'blog/comment.html', {'form':form})
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')

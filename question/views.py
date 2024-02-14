@@ -7,7 +7,7 @@ from .models import RepetitiveQuestion, Question
 
 def dailyQuestion(request):
     rq = RepetitiveQuestion.objects.all().order_by('created_at')
-    return render(request, "daily.html", {'questions': rq})
+    return render(request, "question/daily.html", {'questions': rq})
 
 
 def askQuestion(request):
@@ -26,7 +26,7 @@ def askQuestion(request):
                 return redirect('ASKS')
         else:
             form = Ask()
-        return render(request, 'ask.html', {'form':form})
+        return render(request, 'question/ask.html', {'form':form})
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')

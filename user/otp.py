@@ -19,10 +19,10 @@ def sendToken(request, phone):
     
     print(f"The OTP is : {otp}")
     
-    user_sms = SmsIr(api_key=config("API_KEY", cast=str), linenumber=config("MY_NUMBER", cast=str))
+    # user_sms = SmsIr(api_key=config("API_KEY", cast=str), linenumber=config("MY_NUMBER", cast=str))
     
-    user_sms.send_sms(number=phone, message="""
-                      کد احراز هویت شما در سامانه آروت
-                      """, linenumber=config("MY_NUMBER", cast=str))
+    # user_sms.send_sms(number=phone, message="""
+    #                   کد احراز هویت شما در سامانه آروت
+    #                   """, linenumber=config("MY_NUMBER", cast=str))
     
     # send a SMS to User's verified Phone number
