@@ -24,3 +24,19 @@ post_save.connect(create_profile, sender=User)
 
 
 post_delete.connect(delete_user, sender=Profile)
+
+
+################################### update User with Profile ###################################
+
+
+def updateProfile(sender, instance, created, **kwargs):
+    user = instance
+    # if not created:
+    #     if User.objects.get(phone=user.phone):
+    #         new_profile = User.objects.update(
+    #             phone=user.phone,
+    #             email=user.email,
+    #         )
+
+
+post_save.connect(updateProfile, sender=Profile)
