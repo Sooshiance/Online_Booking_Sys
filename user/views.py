@@ -66,7 +66,7 @@ def registerUser(request):
             user.is_active = False
             user.save()
             request.session["pk"] = user.pk
-            sendToken(request=request)
+            sendToken(request=request, phone=phone)
             messages.success(request, 'اطلاعات شما با موفقیت ثبت گردید')
             return redirect('HOME')
         else:
@@ -242,7 +242,7 @@ def otpResetPassword(request):
         if User.objects.filter(phone__exact=phone):
             user = User.objects.get(phone=phone)
             request.session["pk"] = user.pk
-            sendToken(request=request)
+            sendToken(request=request, phone=phone)
             messages.success(request, "")
             return redirect('RESET')
         else:
