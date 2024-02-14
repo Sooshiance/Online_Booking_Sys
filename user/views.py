@@ -1,6 +1,6 @@
 import pyotp
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth, messages
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
@@ -39,7 +39,7 @@ def loginUser(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'خوش آمدید')
-            return redirect('HOME')
+            return redirect('PROFILE')
         else:
             messages.error(request, 'مشخصات وارد شده اشتباه می باشد، دوباره تلاش کنید')
             return render(request, 'user/login.html')
@@ -139,8 +139,6 @@ def userProfile(request):
         user = request.user 
         prof = Profile.objects.get(user=request.user)
         pk = User.objects.get(phone=prof.phone)
-        print(pk.pk)
-        request.session["pk"] = pk.pk
         arrot_reserved = ArrotModel.objects.filter(user__exact=request.user)
         golsa_reserved = GolsaModel.objects.filter(user__exact=request.user)
         asked = Question.objects.all().filter(user__exact=request.user)           
@@ -161,26 +159,31 @@ def userProfile(request):
         return redirect('LOGIN')
 
 
-def updateProfile(request):
+def updateProfile(request, pk):
     form = UserUpdate(request.POST or None)
     if request.user.is_authenticated:
+        obj = get_object_or_404(User, pk=pk)
         if request.method == 'POST':
-            user =request.user 
-            pk = request.session.get("pk")
             if form.is_valid():
                 phone = form.cleaned_data["phone"]
                 email = form.cleaned_data['email']
                 username = form.cleaned_data['username']
                 first_name = form.cleaned_data['first_name']
                 last_name = form.cleaned_data['last_name']
-                User.objects.aupdate(phone=phone,email=email,username=username,first_name=first_name,
-                                     last_name=last_name)
+                obj = get_object_or_404(User, pk=pk)
+                obj.phone=phone
+                obj.email=email
+                obj.username=username
+                obj.first_name=first_name
+                obj.last_name=last_name
+                obj.save()
+                messages.success(request=request, message="اطلاعات با موفقیت ذخیره شد")
                 return redirect("PROFILE")
             else:
                 messages.error(request=request, message="خطا در فرم به روز رسانی")
                 return redirect("UPDATE-PROFILE")
         form = UserUpdate()
-        return render(request, "user/update_profile.html", {'form':form})
+        return render(request, "user/update_profile.html", {'form':form, 'user':obj})
     else:
         return redirect("LOGIN")
 

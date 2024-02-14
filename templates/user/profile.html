@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row mt-3 mb-3">
-            <p class="text-center">خدمات مطب آروت بیوتی که تا کنون شما انتخاب کرده اید:</p>
+            <p class="text-center">خدمات مرکز زیبایی آروت بیوتی که تا کنون شما انتخاب کرده اید:</p>
             <div class="row mb-4 mt-4">
                 <div class="col-2">عنوان</div>
                 <div class="col-2">ساعت</div>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="row mt-3 mb-3">
-            <p class="text-center mt-5">خدمات سالن آروت بیوتی که تا کنون شما انتخاب کرده اید:</p>
+            <p class="text-center mt-5">خدمات سالن زیبایی آروت بیوتی که تا کنون شما انتخاب کرده اید:</p>
             <div class="row mb-4 mt-4">
                 <div class="col-2">عنوان</div>
                 <div class="col-2">ساعت</div>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="row mt-3 mb-3">
-            <p class="text-center mt-5">:پرسش هایی که تا کنون شما برای ما ارسال کرده اید</p>
+            <p class="text-center mt-5">پرسش هایی که تا کنون شما برای ما ارسال کرده اید:</p>
             <div class="row mb-5 mt-2">
                 <div class="col-3">عنوان</div>
                 <div class="col-9">متن</div>
@@ -80,16 +80,18 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="row mb-5 mt-5">
-            <p class="text-center mt-5">میزان شارژ شده کیف پول شما</p>
+        <div class="row m-5 p-5">
+            <p class="text-center mt-5"> شارژ کیف پول شما</p>
             <div class="col-12 text-center"> {{ wallet.reach_limit }} </div>
         </div>
-        <div class="row mb-5 mt-5">
+        <div class="row p-5 text-center">
+            <div class="row mb-5 mt-5">
             <div class="col-12 text-center">
-                <a href="{% url 'UPDATE-PROFILE' %}">
-                    به روز رسانی
+                <a href="{% url 'UPDATE-PROFILE' user.pk %}" class="btn btn-danger">
+                    به روز رسانی پروفایل کاربری
                 </a>
             </div>
         </div>
+        </div>        
     </div>
 {% endblock doc %}

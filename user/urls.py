@@ -8,7 +8,7 @@ urlpatterns = [
     path('', loginUser, name='LOGIN'),
     path('logout/', logoutUser, name='LOGOUT'),
     path('profile/', userProfile, name='PROFILE'),
-    path('profile/update/', updateProfile, name='UPDATE-PROFILE'),
+    path('profile/update/<int:pk>/', updateProfile, name='UPDATE-PROFILE'),
     
     # TODO : Register
     path('register/', registerUser, name='REGISTER'),

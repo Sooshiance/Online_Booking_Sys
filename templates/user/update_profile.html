@@ -1,7 +1,7 @@
 {% extends "root.html" %}
 
 {% block title %}
-
+تغییر پروفایل کاربری {{ user.username }}
 {% endblock title %}
 
 {% block doc %}
@@ -17,21 +17,23 @@
                                 <div class="text-center">
                                     <h4 class="mt-1 mb-5 pb-1">از طرف گروه پشتیبانی آروت بیوتی</h4>
                                 </div>
-                                <form action="{% url 'UPDATE-PROFILE' %}" method="post">
+                                <form action="{% url 'UPDATE-PROFILE' user.pk %}" method="post">
                                     
                                     {% for field in form %}
-                                        <div class="mb-3">
-                                            {{ field.label }}
-                                        </div>
-                                        <div class="mb-3">
-                                            {{ field }}
+                                        <div class="mb-5 mt-5">
+                                            <div class="m-1">
+                                                {{ field.label }}
+                                            </div>
+                                            <div class="m-1">
+                                                {{ field }}
+                                            </div>
                                         </div>
                                     {% endfor %}
                                         
                                     {% csrf_token %}
 
-                                    <div class="d-grid-flex mb-3 mt-3">
-                                        <button class="btn btn-outline-dark" type="submit"> تغییر دادن</button>
+                                    <div class="d-grid mb-5 mt-5">
+                                        <button class="p-2 btn btn-outline-dark" type="submit"> تغییر دادن</button>
                                     </div>
                                 </form>
                             </div>

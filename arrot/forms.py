@@ -17,11 +17,13 @@ class ClinicReserve(forms.ModelForm):
             'hour': forms.Select(attrs={'class':'form-control my-5'}),
             'description': forms.Textarea(attrs={'class':'form-control my-5'}),
         }
+    
     def __init__(self, *args, **kwargs):
         super(ClinicReserve, self).__init__(*args, **kwargs)
         self.fields['date'] = JalaliDateField(label='روز', # date format is  "yyyy-mm-dd"
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
+    
     def clean(self):
         cleaned_data = super().clean()
         date = cleaned_data.get('date')
@@ -44,11 +46,13 @@ class SalonReserve(forms.ModelForm):
             'hour': forms.Select(attrs={'class':'form-control my-5'}),
             'description': forms.Textarea(attrs={'class':'form-control my-5'}),
         }
+    
     def __init__(self, *args, **kwargs):
         super(SalonReserve, self).__init__(*args, **kwargs)
         self.fields['date'] = JalaliDateField(label='روز', # date format is  "yyyy-mm-dd"
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
+    
     def clean(self):
         cleaned_data = super().clean()
         date = cleaned_data.get('date')

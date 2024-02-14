@@ -80,7 +80,7 @@ class GolsaModel(models.Model):
 
 class Wallet(models.Model):
     user        = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر', related_name="user_wallet")
-    reach_limit = models.PositiveSmallIntegerField(validators=[MinValueValidator(-1), MaxValueValidator(Max_Limit)], default=0)
+    reach_limit = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(Max_Limit)], default=0)
     
     def remove_turn(self):
         self.reach_limit -= 1

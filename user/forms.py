@@ -35,3 +35,8 @@ class UserUpdate(forms.Form):
     username = forms.CharField(label="نام کاربری")
     first_name = forms.CharField(label="نام")
     last_name = forms.CharField(label="نام خانوادگی")
+    
+    def __init__(self, *args, **kwargs):
+        super(UserUpdate, self).__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control my-3'})
