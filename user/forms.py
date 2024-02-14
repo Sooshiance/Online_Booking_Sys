@@ -13,6 +13,7 @@ class RegisterUser(forms.ModelForm):
         widgets = {
             'email': forms.EmailInput(attrs={'class':'form-control my-5', 'placeholder':'example1234@gmail.com'}),
             'phone': forms.NumberInput(attrs={'class':'form-control my-5', 'placeholder':'09123456789'}),
+            'username': forms.TextInput(attrs={'class':'form-control my-5', 'placeholder':'Username'}),
             'password': forms.PasswordInput(attrs={'class':'form-control my-5', 'placeholder':'••••••••••••'}),
             'first_name': forms.TextInput(attrs={'class':'form-control my-5', 'placeholder':'Ali'}),
             'last_name': forms.TextInput(attrs={'class':'form-control my-5', 'placeholder':'alizadeh'}),

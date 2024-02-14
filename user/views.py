@@ -2,6 +2,7 @@ import pyotp
 
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
+from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
 from django.http import HttpResponseNotAllowed
@@ -14,6 +15,12 @@ from .otp import sendToken
 
 from arrot.models import ArrotModel, GolsaModel, Wallet
 from question.models import Question
+
+
+########################## Settings important config
+
+
+Max_Limit = settings.MAX_LIMIT
 
 
 ########################## Authentication Section ##########################
@@ -57,10 +64,11 @@ def registerUser(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-            user = User.objects.create_user(email=email, password=password,first_name=first_name,
+            user = User.objects.create_user(email=email, username=username, password=password,first_name=first_name,
                                             last_name=last_name, phone=phone)
             user.set_password(password)
             user.is_active = False
@@ -315,7 +323,7 @@ def confirmResetPassowrd(request):
 def adminPrivileges(request):
     if request.user.is_authenticated:
         if request.user.is_superuser == True:
-            w = Wallet.objects.all().filter(reach_limit=20)
+            w = Wallet.objects.all().filter(reach_limit=Max_Limit)
             return render(request, 'admin_panel.html', {"users_reach_limit":w})
         else:
             return HttpResponseNotAllowed("you are not superuser!")

@@ -10,11 +10,14 @@
         
         {% for obj in users_reach_limit %}
 
-            <div class="col-6 h1">
+            <div class="col-4 h1">
                 {{ obj.user.fullName }}
             </div>
-            <div class="col-6 h1">
+            <div class="col-4 h1">
                 {{ obj.user.phone }}
+            </div>
+            <div class="col-4 h1">
+                {{ obj.user.pk }}
             </div>
             
         {% endfor %}

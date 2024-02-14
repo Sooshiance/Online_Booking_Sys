@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.http import HttpRequest
 
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin	
@@ -15,7 +16,7 @@ class MyInlines1(TabularInlineJalaliMixin, admin.TabularInline):
 
 
 class ArrotAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
-    list_display = ('user', 'title', 'hour', 'admin_approval', 'pk')
+    list_display = ('user', 'title', 'hour', 'admin_approval', 'date')
     list_filter = ('admin_approval',)
     sortable_by = ('created_at', 'title')
     readonly_fields = ('created_at', 'updated_at')
@@ -24,7 +25,7 @@ class ArrotAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
 
 
 class GolsaAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
-    list_display = ('user', 'title', 'hour', 'admin_approval', 'pk')
+    list_display = ('user', 'title', 'hour', 'admin_approval', 'date')
     list_filter = ('admin_approval',)
     sortable_by = ('created_at', 'title')
     readonly_fields = ('created_at', 'updated_at')
@@ -35,6 +36,7 @@ class GolsaAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
 class WalletAdmin(admin.ModelAdmin):
     list_display = ['user', 'reach_limit']
     list_filter = ['reach_limit']
+    search_fields = ("user__phone",)
 
 
 admin.site.register(ArrotModel, ArrotAdmin)

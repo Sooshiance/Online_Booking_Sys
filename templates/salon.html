@@ -4,12 +4,11 @@
 {% endblock title %}
 {% block doc %}
     <div style="text-align: center;">
-        <p class="h1">
-            تاریخ را به صورت زیر وارد نمایید
-            <p class="h1">1402-01-01</p>
+        <p class="h1 mb-5 mt-5">
+            برای دریافت خدمات در روزهای تعطیل با مدیریت هماهنگ نمایید.
         </p>
     </div>
-    <form action="{% url 'SALON' %}" method="post">
+    <form action="{% url 'SALON' %}" method="post" class="mb-5">
         <label for="">عنوان</label>
         {{ form.title }}
         <label for="">روز</label>

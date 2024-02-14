@@ -12,7 +12,7 @@ class Post(models.Model):
     title          = models.CharField(max_length=100, verbose_name='سربرگ')
     txt            = models.TextField(verbose_name='دیدگاه')
     admin_approval = models.BooleanField(default=False, verbose_name='تایید مدیر')
-    vote           = models.PositiveSmallIntegerField(verbose_name='امتیاز', null=True, blank=True,
+    vote           = models.PositiveSmallIntegerField(verbose_name='امتیاز', null=False, blank=False,
                                             validators=[MinValueValidator(1),MaxValueValidator(10)])
     created_at     = jmodels.jDateTimeField(auto_now_add=True, verbose_name='نوشته شده در تاریخ')
     
