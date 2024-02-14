@@ -115,4 +115,4 @@ class Profile(models.Model):
         return str(self.first_name) + " " + str(self.last_name)
     
     def __str__(self) -> str:
-        return f"{self.user} {self.email}"
+        return f"{self.pk} {self.user} {self.email}"

@@ -25,5 +25,13 @@ class OTPForm(forms.Form):
 
 
 class Mail(forms.Form):
-    title = forms.TextInput(attrs={'class':'form-control my-4'})
-    txt   = forms.TextInput(attrs={'class':'form-control my-4'})
+    title = forms.CharField(widget={})
+    txt   = forms.CharField(widget={})
+
+
+class UserUpdate(forms.Form):
+    phone = forms.CharField(label="شماره تماس")
+    email = forms.EmailField(label="پست الکترونیکی")
+    username = forms.CharField(label="نام کاربری")
+    first_name = forms.CharField(label="نام")
+    last_name = forms.CharField(label="نام خانوادگی")

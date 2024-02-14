@@ -9,7 +9,7 @@ from django.http import HttpResponseNotAllowed
 from django.utils.timezone import datetime
 
 from .models import User, Profile
-from .forms import RegisterUser, OTPForm
+from .forms import *
 from .utils import passwordResetEmail
 from .otp import sendToken
 
@@ -138,6 +138,9 @@ def userProfile(request):
     if request.user.is_authenticated:
         user = request.user 
         prof = Profile.objects.get(user=request.user)
+        pk = User.objects.get(phone=prof.phone)
+        print(pk.pk)
+        request.session["pk"] = pk.pk
         arrot_reserved = ArrotModel.objects.filter(user__exact=request.user)
         golsa_reserved = GolsaModel.objects.filter(user__exact=request.user)
         asked = Question.objects.all().filter(user__exact=request.user)           
@@ -145,17 +148,41 @@ def userProfile(request):
             w = Wallet.objects.get(user=user)
         except:
             w = None
-        wallet=w 
-        print(wallet)
+        wallet=w
         context = {'profile':prof,
                    'arrot':arrot_reserved,
                    'golsa':golsa_reserved,
                    'questions':asked,
+                   'user':pk,
                    'wallet':wallet,}
         return render(request, 'user/profile.html', context=context)
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')
+
+
+def updateProfile(request):
+    form = UserUpdate(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user =request.user 
+            pk = request.session.get("pk")
+            if form.is_valid():
+                phone = form.cleaned_data["phone"]
+                email = form.cleaned_data['email']
+                username = form.cleaned_data['username']
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                User.objects.aupdate(phone=phone,email=email,username=username,first_name=first_name,
+                                     last_name=last_name)
+                return redirect("PROFILE")
+            else:
+                messages.error(request=request, message="خطا در فرم به روز رسانی")
+                return redirect("UPDATE-PROFILE")
+        form = UserUpdate()
+        return render(request, "user/update_profile.html", {'form':form})
+    else:
+        return redirect("LOGIN")
 
 
 def deleteArrotItem(request, pk):

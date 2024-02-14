@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import locale
 from decouple import config
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -174,6 +175,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # STATIC_ROOT = (os.path.join(BASE_DIR, 'ui'),)
+
+
+LOGIN_URL = reverse_lazy("LOGIN")
+LOGOUT_URL = reverse_lazy("LOGOUT")
+LOGIN_REDIRECT_URL = reverse_lazy("PROFIILE")
+LOGOUT_REDIRECT_URL = reverse_lazy("HOME")
 
 
 MEDIA_URL = '/media/'
