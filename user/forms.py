@@ -22,3 +22,8 @@ class RegisterUser(forms.ModelForm):
 
 class OTPForm(forms.Form):
     otp = forms.CharField(label="OTP", max_length=6)
+
+
+class Mail(forms.Form):
+    title = forms.TextInput(attrs={'class':'form-control my-4'})
+    txt   = forms.TextInput(attrs={'class':'form-control my-4'})
