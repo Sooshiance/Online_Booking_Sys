@@ -14,3 +14,10 @@ def noFriday(date):
         raise ValidationError("این روز تعطیل میباشد")
     else:
         return date
+
+
+def persianFriday(date):
+    if date.weekday() == 6:
+        raise ValidationError('')
+    else:
+        return date 

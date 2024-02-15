@@ -214,7 +214,7 @@ DATABASES = {
 MAX_LIMIT = 10
 
 
-# TODO: meta tag for Open Graph and SEO
+# TODO : meta tag for Open Graph and SEO
 META_SITE_PROTOCOL = 'https'
 META_SITE_DOMAIN = config('META_SITE_DOMAIN')
 META_SITE_NAME = config('META_SITE_NAME')
