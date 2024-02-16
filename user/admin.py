@@ -7,15 +7,14 @@ from .models import User, Profile
 
 
 class Admin(UserAdmin):
-    list_display = ('phone', 'fullName', 'email', 'is_active', 'pk', 'joined_at')
+    list_display = ('phone', 'fullName', 'email', 'is_active', 'pk',)
     filter_horizontal = ()
-    list_filter = (('joined_at', JDateFieldListFilter), 'is_active')
+    list_filter = ('is_active',)
     fieldsets = ()
     search_fields = ('email', 'phone')
     list_display_links = ('phone', 'email')
     # This line below added because 'ordering' attribute need a dependency
-    ordering = ('email', 'joined_at')
-    readonly_fields = ('joined_at', 'pk')
+    ordering = ('email', 'username')
 
 
 class AdminProfile(admin.ModelAdmin):

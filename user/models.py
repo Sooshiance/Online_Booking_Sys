@@ -75,7 +75,7 @@ class User(AbstractBaseUser):
     is_active    = models.BooleanField(default=False, null=False, verbose_name='وضعیت فعالیت')
     is_staff     = models.BooleanField(default=False, null=False, verbose_name='دسترسی ادمین')
     is_superuser = models.BooleanField(default=False, null=False, verbose_name='مدیر')
-    joined_at    = jmodels.jDateTimeField(auto_now_add=True, verbose_name='تاریخ عضویت')
+    # joined_at    = jmodels.jDateTimeField(auto_now_add=True, verbose_name='تاریخ عضویت')
 
     objects = AllUser()
 

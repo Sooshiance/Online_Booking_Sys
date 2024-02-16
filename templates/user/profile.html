@@ -7,37 +7,35 @@
         <div class="row">
             <div class="col h2 text-center">{{ profile.fullName }}</div>
         </div>
-        <div class="row">
-            <div class="col h2 text-center">{{ profile.phone }}</div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p class="text-center h1" style="color: red;">
-                    توجه داشته باشید، اگر گزینه حذف را انتخاب کنید، نوبت شما بلافاصله حذف خواهد شد:
-                </p>
-            </div>
-        </div>
         <div class="row mt-3 mb-3">
             <p class="text-center">خدمات مرکز زیبایی آروت بیوتی که تا کنون شما انتخاب کرده اید:</p>
             <div class="row mb-4 mt-4">
                 <div class="col-2">عنوان</div>
                 <div class="col-2">ساعت</div>
                 <div class="col-3">روز</div>
-                <div class="col-3">تایید مدیر</div>
-                <div class="col-2">حذف</div>
+                <div class="col-2">تایید مدیر</div>
+                <div class="col-2">تعویض نوبت</div>
+                <div class="col-1">حذف</div>
             </div>
             <div class="row mb-4 mt-4">
                 {% for afield in arrot %}
                     <div class="col-2 mb-3 mt-3 p-3">{{ afield.title }}</div>
                     <div class="col-2 mb-3 mt-3 p-3">{{ afield.hour }}</div>
-                    <div class="col-3 mb-3 mt-3 p-3">{{ afield.date }}</div>
+                    <div class="col-3 mb-3 mt-3 p-3">{{ afield.jtime }}</div>
                     {% if afield.admin_approval %}
-                        <div class="col-3 mb-3 mt-3 p-3" style="color: rgb(0, 100, 0);">تایید شده</div>
+                        <div class="col-2 mb-3 mt-3 p-3 h4" style="color: rgb(0, 100, 0);">
+                            <i class="bi bi-check-square-fill"></i>
+                        </div>
                     {% else %}
-                        <div class="col-3 mb-3 mt-3 p-3" style="color: red;">تایید نشده</div>
+                        <div class="col-2 mb-3 mt-3 p-3 h4" style="color: red;">
+                            <i class="bi bi-x-square-fill"></i>
+                        </div>
                     {% endif %}
-                    <div class="col-2 mb-3 mt-3 p-3">
-                        <a href="{% url 'DELETEARROT' afield.pk %}" style="color: red;">حذف</a>
+                    <div class="col-2 mb-3 mt-3 p-3"><a href="" class="h4 btn btn-primary"><i class="bi bi-wrench"></i></a></div>
+                    <div class="col-1 mb-3 mt-3 p-3">
+                        <a class="h4" href="{% url 'DELETEARROT' afield.pk %}" style="color: red;">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
                     </div>
                 {% endfor %}
             </div>
@@ -48,21 +46,30 @@
                 <div class="col-2">عنوان</div>
                 <div class="col-2">ساعت</div>
                 <div class="col-3">روز</div>
-                <div class="col-3">تایید مدیر</div>
-                <div class="col-2">حذف</div>
+                <div class="col-2">تایید مدیر</div>
+                <div class="col-2">تعویض نوبت</div>
+                <div class="col-1">حذف</div>
             </div>
+            <div class="row m-2"></div>
             <div class="row mb-4 mt-4">
                 {% for gfield in golsa %}
                     <div class="col-2 mb-3 mt-3 p-3">{{ gfield.title }}</div>
                     <div class="col-2 mb-3 mt-3 p-3">{{ gfield.hour }}</div>
-                    <div class="col-3 mb-3 mt-3 p-3 h-6">{{ gfield.date }}</div>
+                    <div class="col-3 mb-3 mt-3 p-3">{{ gfield.jtime }}</div>
                     {% if gfield.admin_approval %}
-                        <div class="col-3 mb-3 mt-3 p-3" style="color: rgb(0, 0, 200);">تایید شده</div>
+                        <div class="col-2 mb-3 mt-3 p-3 h4" style="color: rgb(0, 100, 0);">
+                            <i class="bi bi-check-square-fill"></i>
+                        </div>
                     {% else %}
-                        <div class="col-3 mb-3 mt-3 p-3" style="color: red;">تایید نشده</div>
+                        <div class="col-2 mb-3 mt-3 p-3 h4" style="color: red;">
+                            <i class="bi bi-x-square-fill"></i>
+                        </div>
                     {% endif %}
-                    <div class="col-2 mb-3 mt-3 p-3">
-                        <a href="{% url 'DELETEGOLSA' gfield.pk %}" style="color: red;">حذف</a>
+                    <div class="col-2 mb-3 mt-3 p-3"><a href="" class="h5 btn btn-primary"><i class="bi bi-wrench"></i></a></div>
+                    <div class="col-1 mb-3 mt-3 p-3">
+                        <a class="h4" href="{% url 'DELETEGOLSA' gfield.pk %}" style="color: red;">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
                     </div>
                 {% endfor %}
             </div>

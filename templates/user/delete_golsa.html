@@ -1,0 +1,45 @@
+{% extends "root.html" %}
+
+{% block title %}
+{{ user.username }}-حذف {{ field.title }}
+{% endblock title %}
+
+{% block doc %}
+
+<section class="vh-80">
+    <div class="container-fluid">
+        <div class="row">
+            آیا میخواهید نوبت انتخابی خود با جزئیات زیر را حذف کنید؟
+        </div>
+        <div class="row m-5">
+            <div class="col-1 m-1 p-1">عنوان</div>
+            <div class="col-4 mb-3 mt-3 p-1">{{ field.title }}</div>           
+        </div>
+        <div class="row m-5">
+            <div class="col-1 m-1 p-1">ساعت</div>
+            <div class="col-4 mb-3 mt-3 p-1">{{ field.hour }}</div>            
+        </div>
+        <div class="row m-5">
+            <div class="col-1 m-1 p-1">روز</div>
+            <div class="col-4 mb-3 mt-3 p-1">{{ field.jtime }}</div>
+        </div>
+        <div class="row">
+            <form action="{% url 'DELETEGOLSA' field.pk %}" method="post">
+                {% csrf_token %}
+                <p class="text-danger h1 m-4">
+                    <i class="bi bi-exclamation-circle-fill"></i> هشدار
+                </p>
+                <p class="text-danger h3 m-4">
+                    اگر نوبت حذف شده توسط دیگران انتخاب شود شما نمی توانید آنرا مجددا رزرو کنید 
+                </p>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-danger">
+                        حذف کردن
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock doc %}

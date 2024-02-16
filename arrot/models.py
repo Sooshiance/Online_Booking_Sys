@@ -77,7 +77,7 @@ class GolsaModel(models.Model):
     
     class Meta:
         ordering = ['-created_at']
-        unique_together = ['title', 'hour', 'date']
+        unique_together = ['title', 'jtime', 'hour', 'date']
 
 
 class Wallet(models.Model):

@@ -15,8 +15,7 @@
       {% endblock title %}
     </title>
     <!-- Vendor CSS Files -->
-    <link rel="stylesheet"
-          href="{% static 'assets/vendor/bootstrap/css/bootstrap.rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.rtl.min.css' %}">
     <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}"
           rel="stylesheet">
     <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}"
@@ -36,6 +35,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
     <!-- =======================================================
@@ -121,7 +124,7 @@
               <div>09125167627</div>
             </div>
             <div class="col-lg-2 col-md-6 footer-links">
-              <h4>لینک های مفید</h4>
+              <h4>لینک های وبسایت</h4>
               <ul>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="{% url 'HOME' %}">خانه</a>
@@ -131,6 +134,20 @@
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="{% url 'DAILY' %}">پرسشها</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>لینک های مفید</h4>
+              <ul>
+                <li>
+                  <i class="bi bi-instagram"></i>
+                </li>
+                <li>
+                  <i class="bi bi-telegram"></i>
+                </li>
+                <li>
+                  <i class="bi bi-whatsapp"></i>
                 </li>
               </ul>
             </div>

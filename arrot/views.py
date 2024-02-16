@@ -16,11 +16,12 @@ def reserveClinicView(request):
             if form.is_valid():
                 title = form.cleaned_data['title']
                 date = form.cleaned_data['date']
+                jtime = form.cleaned_data['jtime']
                 hour = form.cleaned_data['hour']
                 description = form.cleaned_data['description']
                 
                 object = ArrotModel.objects.create(title=title, date=date, hour=hour, description=description,
-                                                    user=request.user)                
+                                                    user=request.user, jtime=jtime)                
                 messages.success(request, 'نوبت شما با موفقیت ذخیره شد')
                 return redirect('RESERVED')
             else:
@@ -42,11 +43,12 @@ def reserveSalonView(request):
             if form.is_valid():
                 title = form.cleaned_data['title']
                 date = form.cleaned_data['date']
+                jtime = form.cleaned_data['jtime']
                 hour = form.cleaned_data['hour']
                 description = form.cleaned_data['description']
                 
                 object = GolsaModel.objects.create(title=title, date=date, hour=hour, description=description,
-                                                    user=request.user)
+                                                    user=request.user, jtime=jtime)
                                 
                 messages.success(request, 'نوبت شما با موفقیت ذخیره شد')
                 return redirect('RESERVED')

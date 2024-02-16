@@ -8,3 +8,4 @@ psycopg2-binary==2.9.6
 python-decouple==3.8
 sqlparse==0.4.4
 django-jalali-date==1.1.0
+mysqlclient==2.2.4

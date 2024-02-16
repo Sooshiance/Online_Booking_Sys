@@ -9,14 +9,7 @@
         </p>
     </div>
     <form action="{% url 'SALON' %}" method="post" class="mb-5">
-        <label for="">عنوان</label>
-        {{ form.title }}
-        <label for="">روز</label>
-        {{ form.date }}
-        <label for="">ساعت</label>
-        {{ form.hour }}
-        <label for="">توضیحات</label>
-        {{ form.description }}
+        {{ form.as_p }}
         {% csrf_token %}
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="sibmit" value="submit">دریافت</button>

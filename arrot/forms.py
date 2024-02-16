@@ -1,6 +1,8 @@
 from django import forms 
 from django.core.exceptions import ValidationError
 
+from django_jalali.forms.widgets import jDateInput
+
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
 
@@ -10,10 +12,10 @@ from .models import ArrotModel, GolsaModel
 class ClinicReserve(forms.ModelForm):
     class Meta:
         model = ArrotModel
-        fields = ("title", "date", "hour", "description")
+        fields = ("title", "date", "jtime", "hour", "description")
         widgets = {
             'title': forms.Select(attrs={'class':'form-control my-5'}),
-            # 'date': forms.DateInput(attrs={'class': 'form-control my-5'}),
+            'jtime': jDateInput(attrs={'class': 'form-control my-5', 'placeholder':'1403-11-11'}),
             'hour': forms.Select(attrs={'class':'form-control my-5'}),
             'description': forms.Textarea(attrs={'class':'form-control my-5'}),
         }
@@ -39,10 +41,10 @@ class ClinicReserve(forms.ModelForm):
 class SalonReserve(forms.ModelForm):
     class Meta:
         model = GolsaModel
-        fields = ("title", "date", "hour", "description")
+        fields = ("title", "date", "jtime", "hour", "description")
         widgets = {
             'title': forms.Select(attrs={'class':'form-control my-5'}),
-            # 'date': jDateInput(attrs={'class': 'form-control my-5'}),
+            'jtime': jDateInput(attrs={'class': 'form-control my-5'}),
             'hour': forms.Select(attrs={'class':'form-control my-5'}),
             'description': forms.Textarea(attrs={'class':'form-control my-5'}),
         }

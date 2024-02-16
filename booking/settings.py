@@ -199,6 +199,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 AUTH_USER_MODEL = "user.User"
 
 
+# TODO : Postgres database 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -208,6 +209,22 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
     }
 }
+
+
+# TODO : MySQL database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'arrot',
+#         'USER': 'root',
+#         'HOST': '127.0.0.1',
+#         'PASSWORD': '',
+#         'PORT': '3306',
+#         'OPTIONS': {  
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+#         },
+#     }
+# }
 
 
 # TODO : Important for Wallet model
