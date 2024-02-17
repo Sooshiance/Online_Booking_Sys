@@ -3,41 +3,12 @@ from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django_jalali.db import models as jmodels
 
+from .enums import *
 from .utils import passedDays, noFriday
 
 
 User = settings.AUTH_USER_MODEL
 Max_Limit = settings.MAX_LIMIT
-
-
-ARROT_SERVICES = (
-    ('هایفو تراپی', 'هایفو تراپی'),
-    ('فشیال پاکسازی پوست', 'فشیال پاکسازی پوست'),
-    ('تزریق بوتاکس', 'تزریق بوتاکس'),
-    ('تزریق فیلر', 'تزریق فیلر'),
-    ('تزریق ژل', 'تزریق ژل'),
-    ('لیزر مو های زائد', 'لیزر مو های زائد'),
-    ('مزو تراپی', 'مزو تراپی'),
-    ('لاغری با دستگاه', 'لاغری با دستگاه'),
-    ('مشاوره تغذیه', 'مشاوره تغذیه'),
-    ('میکرونیدلینگ', 'میکرونیدلینگ'),
-)
-
-
-GOLSA_SERVICES = (
-    ('کاشت مژه', 'کاشت مژه'),
-    ('کاشت ناخن', 'کاشت ناخن'),
-    ('هایلایت ابرو', 'هایلایت ابرو'),
-)
-
-
-HOURS = (
-    ('08-10', '08-10'),
-    ('10-12', '10-12'),
-    ('12-14', '12-14'),
-    ('14-16', '14-16'),
-    ('16-18', '16-18'),
-)
 
 
 class ArrotModel(models.Model):

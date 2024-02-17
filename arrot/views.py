@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from .models import ArrotModel, GolsaModel, Wallet
-from .forms import ClinicReserve, SalonReserve
+from .forms import *
 
 
 def reserveLink(request):
     return render(request, "arrot/reservation.html")
+
+
+############################ TODO : Clinic reservation ############################
 
 
 def reserveClinicView(request):
@@ -39,9 +42,12 @@ def reserveClinicView(request):
 
 def changingArrotItem(request, pk):
     if request.user.is_authenticated:
-        form = ClinicReserve(request.POST or None)
+        form = RepairClinic(request.POST or None)
         obj = get_object_or_404(ArrotModel, pk=pk)
         auth_user = request.user
+        if request.method == "POST":
+            if form.is_valid() and obj is not None:
+                title = form.cleaned_data['title']
         context = {'field':obj, 'user':auth_user, 'form':form}
         return render(request, "arrot/change_arrot.html", context=context)
     else:
@@ -68,6 +74,9 @@ def deleteArrotItem(request, pk):
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')
+
+
+############################ TODO : Salon reservation ############################
 
 
 def reserveSalonView(request):
@@ -123,6 +132,9 @@ def changingGolsaItem(request, pk):
         form = SalonReserve(request.POST or None)
         obj = get_object_or_404(GolsaModel, pk=pk)
         auth_user = request.user
+        if request.method == "POST":
+            if form.is_valid() and obj is not None:
+                pass
         context = {'field':obj, 'user':auth_user, 'form':form}
         return render(request, "arrot/change_golsa.html", context=context)
     else:

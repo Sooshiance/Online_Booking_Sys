@@ -19,18 +19,18 @@ class ArrotAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
     list_display = ('user', 'title', 'hour', 'admin_approval', 'date')
     list_filter = ('admin_approval',)
     sortable_by = ('created_at', 'title')
-    readonly_fields = ('created_at', 'updated_at')
-    list_display_links = ('user', 'title', 'pk')
-    search_fields = ('user', 'title')
+    readonly_fields = ('created_at', 'updated_at', 'pk')
+    list_display_links = ('user', 'title')
+    search_fields = ('user__phone', 'title')
 
 
 class GolsaAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
     list_display = ('user', 'title', 'hour', 'admin_approval', 'date')
     list_filter = ('admin_approval',)
     sortable_by = ('created_at', 'title')
-    readonly_fields = ('created_at', 'updated_at')
-    list_display_links = ('user', 'title', 'pk')
-    search_fields = ('user', 'title')
+    readonly_fields = ('created_at', 'updated_at', 'pk')
+    list_display_links = ('user', 'title')
+    search_fields = ('user__phone', 'title')
 
 
 class WalletAdmin(admin.ModelAdmin):

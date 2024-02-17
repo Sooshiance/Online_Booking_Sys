@@ -138,7 +138,7 @@ def userProfile(request):
     if request.user.is_authenticated:
         user = request.user 
         prof = Profile.objects.get(user=request.user)
-        pk = User.objects.get(phone=prof.phone)
+        pk = User.objects.get(phone=user.phone)
         arrot_reserved = ArrotModel.objects.filter(user__exact=request.user)
         golsa_reserved = GolsaModel.objects.filter(user__exact=request.user)
         asked = Question.objects.all().filter(user__exact=request.user)           
