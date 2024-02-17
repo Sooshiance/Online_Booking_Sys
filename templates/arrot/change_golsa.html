@@ -10,10 +10,15 @@
 
 <section class="vh-80">
     <form action="{% url 'CHANGEGOLSA' field.pk %}" method="post">
-        {{ form.as_p }}
+        {% for obj in form %}
+            <label for="obj">
+                {{ obj.label }} : {{ obj.help_text }}
+            </label>
+            {{ obj }}
+        {% endfor %}
         {% csrf_token %}
-        <div class="d-grid bt btn-warning">
-            <button type="submit" class="">تغییر</button>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-info">تغییر</button>
         </div>
     </form>
 </section>

@@ -17,7 +17,7 @@ class ArrotModel(models.Model):
     title          = models.TextField(choices=ARROT_SERVICES, verbose_name='نام خدمات')
     hour           = models.CharField(max_length=5, choices=HOURS, verbose_name='زمان انتخابی')
     date           = models.DateField(validators=[passedDays, noFriday], verbose_name='روز انتخابی')
-    jtime          = jmodels.jDateField(validators=[], verbose_name='روز انتخابی', help_text='داده بالا را عینا اینجا وارد کنید', null=True, blank=True)
+    jtime          = jmodels.jDateField(validators=[passedDays,], verbose_name='روز انتخابی', help_text='داده بالا را عینا اینجا وارد کنید', null=True, blank=True)
     description    = models.TextField(null=True, blank=True, verbose_name='توضیحات کوتاه')
     admin_approval = models.BooleanField(default=False, verbose_name='تایید مدیر')
     created_at     = jmodels.jDateTimeField(auto_now_add=True, verbose_name='ایجاد شده در')
@@ -37,7 +37,7 @@ class GolsaModel(models.Model):
     title          = models.TextField(choices=GOLSA_SERVICES, verbose_name='نام خدمات')
     hour           = models.CharField(max_length=5, choices=HOURS, verbose_name='زمان انتخابی')
     date           = models.DateField(validators=[passedDays, noFriday], verbose_name='روز انتخابی')
-    jtime          = jmodels.jDateField(validators=[], verbose_name='روز انتخابی', help_text='داده بالا را عینا اینجا وارد کنید')
+    jtime          = jmodels.jDateField(validators=[passedDays,], verbose_name='روز انتخابی', help_text='داده بالا را عینا اینجا وارد کنید')
     description    = models.TextField(null=True, blank=True, verbose_name='توضیح کوتاه')
     admin_approval = models.BooleanField(default=False, verbose_name='تایید مدیر')
     created_at     = jmodels.jDateTimeField(auto_now_add=True, verbose_name='ایجاد شده در')
@@ -58,10 +58,6 @@ class Wallet(models.Model):
     def remove_turn(self):
         self.reach_limit -= 1
         self.save()
-    
-    def fallbackCounter(self):
-        if self.reach_limit == 10:
-            self.reach_limit = 0
 
     def __str__(self) -> str:
         return f"{self.user} {self.reach_limit}"

@@ -44,13 +44,13 @@ class ClinicReserve(forms.ModelForm):
 class RepairClinic(forms.Form):
     title       = forms.ChoiceField(choices=ARROT_SERVICES, label="عنوان", widget=forms.Select(attrs={'class':'form-control my-5'}))
     date        = forms.DateField()
-    jtime       = jforms.jDateField(label="تاریخ", widget=jforms.jDateInput(attrs={'class':'form-control my-5'}))
+    jtime       = jforms.jDateField(label="تاریخ مخصوص زیبا جو", widget=jforms.jDateInput(attrs={'class':'form-control my-5'}), help_text="داده بالا را عینا اینجا کپی کنید")
     hour        = forms.ChoiceField(choices=HOURS, label="ساعت", widget=forms.Select(attrs={'class':'form-control my-5'}))
     description = forms.CharField(max_length=500, label="توضیحات", widget=forms.Textarea(attrs={'class':'form-control my-5'}))
 
     def __init__(self, *args, **kwargs):
         super(RepairClinic, self).__init__(*args, **kwargs)
-        self.fields['date'] = JalaliDateField(label='تاریخ', widget=AdminJalaliDateWidget)
+        self.fields['date'] = JalaliDateField(label='تاریخ مخصوص مدیر', widget=AdminJalaliDateWidget)
 
     def clean(self):
         cleaned_data = super().clean()

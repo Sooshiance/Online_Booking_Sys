@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.http import HttpRequest
 
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin	

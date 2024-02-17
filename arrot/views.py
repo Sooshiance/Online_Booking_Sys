@@ -48,6 +48,19 @@ def changingArrotItem(request, pk):
         if request.method == "POST":
             if form.is_valid() and obj is not None:
                 title = form.cleaned_data['title']
+                date = form.cleaned_data['date']
+                jtime = form.cleaned_data['jtime']
+                description = form.cleaned_data['description']
+                obj.title = title
+                obj.date = date
+                obj.jtime = jtime
+                obj.description = description
+                obj.save()
+                messages.success(request, "")
+                return redirect('PROFILE')
+            else:
+                messages.error(request, "")
+                return redirect("CHANGEARROT")
         context = {'field':obj, 'user':auth_user, 'form':form}
         return render(request, "arrot/change_arrot.html", context=context)
     else:
@@ -112,7 +125,7 @@ def deleteGolsaItem(request, pk):
         obj = get_object_or_404(GolsaModel, pk=pk)
         auth_user = request.user
         context = {'field':obj, 'user':auth_user}
-        if request.method == "POST" and get_object_or_404(GolsaModel, pk=pk):
+        if request.method == "POST" and obj is not None:
             g = GolsaModel.objects.get(pk=pk)
             g.delete()
             user = g.user         
@@ -134,7 +147,20 @@ def changingGolsaItem(request, pk):
         auth_user = request.user
         if request.method == "POST":
             if form.is_valid() and obj is not None:
-                pass
+                title = form.cleaned_data['title']
+                date = form.cleaned_data['date']
+                jtime = form.cleaned_data['jtime']
+                description = form.cleaned_data['description']
+                obj.title = title
+                obj.date = date
+                obj.jtime = jtime
+                obj.description = description
+                obj.save()
+                messages.success(request, "")
+                return redirect("PROFILE")
+            else:
+                messages.error(request, "")
+                return redirect("CHANGEGOLSA")
         context = {'field':obj, 'user':auth_user, 'form':form}
         return render(request, "arrot/change_golsa.html", context=context)
     else:
