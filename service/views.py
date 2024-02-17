@@ -9,6 +9,7 @@ from .forms import Paper
 def home(request):
     cat = Category.objects.all()
     serv = AllService.objects.all()
+    av_serv = AllService.objects.all().filter(is_available=True)
     if request.method == 'POST':
         form = Paper(request.POST)
         if form.is_valid():
@@ -22,7 +23,7 @@ def home(request):
             return redirect('HOME')
     else:
         form = Paper()
-    return render(request, "service/index.html", {'category':cat, 'services': serv, 'form':form})
+    return render(request, "service/index.html", {'category':cat,'services':serv,'form':form,'available':av_serv})
 
 
 def eachCategory(request, slug):
@@ -37,7 +38,8 @@ def eachCategory(request, slug):
 def allService(request):
     try :
         serv = AllService.objects.all()
-        return render(request, "service/allservice.html", {'services': serv})
+        av_serv = AllService.objects.all().filter(is_available=True)
+        return render(request, "service/allservice.html", {'services': serv, 'available':av_serv})
     except:
         return HttpResponseNotFound(content="صفحه مورد نظر یافت نشد")
 

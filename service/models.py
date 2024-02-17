@@ -43,6 +43,10 @@ class AllService(ModelMeta, models.Model):
         'image': 'service_cover',
     }
     
+    def get_meta_image(self):
+        if self.service_cover:
+            return self.service_cover.url
+    
     def __str__(self) -> str:
         return f"{self.category} {self.title} {self.is_available}"
     

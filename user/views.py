@@ -188,47 +188,6 @@ def updateProfile(request, pk):
         return redirect("LOGIN")
 
 
-def deleteArrotItem(request, pk):
-    if request.user.is_authenticated:
-        obj = get_object_or_404(ArrotModel, pk=pk)
-        auth_user = request.user
-        context = {'field':obj, 'user':auth_user}
-        if request.method=="POST" and get_object_or_404(ArrotModel, pk=pk):
-            obj = ArrotModel.objects.get(pk=pk)
-            obj.delete()
-            user = obj.user 
-            w = Wallet.objects.get(user=user)
-            w.remove_turn()
-            print(w.reach_limit)        
-            messages.success(request, 'نوبت انتخابی شما، با موفقیت حذف شد')
-            return redirect('PROFILE')
-        return render(request, "user/delete_arrot.html", context=context)
-        
-    else:
-        messages.info(request, 'لطفا وارد شوید')
-        return redirect('LOGIN')
-
-
-def deleteGolsaItem(request, pk):
-    if request.user.is_authenticated:
-        obj = get_object_or_404(GolsaModel, pk=pk)
-        auth_user = request.user
-        context = {'field':obj, 'user':auth_user}
-        if request.method == "POST" and get_object_or_404(GolsaModel, pk=pk):
-            g = GolsaModel.objects.get(pk=pk)
-            g.delete()
-            user = g.user         
-            w = Wallet.objects.get(user=user)
-            w.remove_turn()
-            print(w.reach_limit)  
-            messages.success(request, 'نوبت انتخابی شما، با موفقیت حذف شد')
-            return redirect('PROFILE')
-        return render(request, "user/delete_golsa.html", context=context)
-    else:
-        messages.info(request, 'لطفا وارد شوید')
-        return redirect('LOGIN')
-
-
 ########################## Password Reset via Email Section ##########################
 
 

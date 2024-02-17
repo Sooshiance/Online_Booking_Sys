@@ -14,10 +14,6 @@ urlpatterns = [
     path('register/', registerUser, name='REGISTER'),
     path('register/otp/', otpRegisterValidation, name='OTP-REGISTER'),
     
-    # TODO : Users control their reserved turns 
-    path('profile/delete-arrot/<int:pk>/', deleteArrotItem, name='DELETEARROT'),
-    path('profile/delete-golsa/<int:pk>/', deleteGolsaItem, name='DELETEGOLSA'),
-    
     # TODO : Email Reset password
     path('forgetpassword/', forgetPassword, name='FORGET'),
     path('reset/<uidb64>/<token>/', resetLink, name='RESET'),

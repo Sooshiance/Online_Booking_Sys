@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from .models import ArrotModel, GolsaModel
+from .models import ArrotModel, GolsaModel, Wallet
 from .forms import ClinicReserve, SalonReserve
 
 
@@ -22,6 +22,7 @@ def reserveClinicView(request):
                 
                 object = ArrotModel.objects.create(title=title, date=date, hour=hour, description=description,
                                                     user=request.user, jtime=jtime)                
+                object.save()
                 messages.success(request, 'نوبت شما با موفقیت ذخیره شد')
                 return redirect('RESERVED')
             else:
@@ -31,6 +32,39 @@ def reserveClinicView(request):
         else:
             form = ClinicReserve()
         return render(request, 'arrot/clinic.html', {'form':form})
+    else:
+        messages.info(request, 'لطفا وارد شوید')
+        return redirect('LOGIN')
+
+
+def changingArrotItem(request, pk):
+    if request.user.is_authenticated:
+        form = ClinicReserve(request.POST or None)
+        obj = get_object_or_404(ArrotModel, pk=pk)
+        auth_user = request.user
+        context = {'field':obj, 'user':auth_user, 'form':form}
+        return render(request, "arrot/change_arrot.html", context=context)
+    else:
+        messages.info(request, "")
+        return redirect("LOGIN")
+
+
+def deleteArrotItem(request, pk):
+    if request.user.is_authenticated:
+        obj = get_object_or_404(ArrotModel, pk=pk)
+        auth_user = request.user
+        context = {'field':obj, 'user':auth_user}
+        if request.method=="POST" and get_object_or_404(ArrotModel, pk=pk):
+            obj = ArrotModel.objects.get(pk=pk)
+            obj.delete()
+            user = obj.user 
+            w = Wallet.objects.get(user=user)
+            w.remove_turn()
+            print(w.reach_limit)        
+            messages.success(request, 'نوبت انتخابی شما، با موفقیت حذف شد')
+            return redirect('PROFILE')
+        return render(request, "arrot/delete_arrot.html", context=context)
+        
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')
@@ -49,7 +83,7 @@ def reserveSalonView(request):
                 
                 object = GolsaModel.objects.create(title=title, date=date, hour=hour, description=description,
                                                     user=request.user, jtime=jtime)
-                                
+                object.save()
                 messages.success(request, 'نوبت شما با موفقیت ذخیره شد')
                 return redirect('RESERVED')
             else:
@@ -62,3 +96,35 @@ def reserveSalonView(request):
     else:
         messages.info(request, 'لطفا وارد شوید')
         return redirect('LOGIN')
+
+
+def deleteGolsaItem(request, pk):
+    if request.user.is_authenticated:
+        obj = get_object_or_404(GolsaModel, pk=pk)
+        auth_user = request.user
+        context = {'field':obj, 'user':auth_user}
+        if request.method == "POST" and get_object_or_404(GolsaModel, pk=pk):
+            g = GolsaModel.objects.get(pk=pk)
+            g.delete()
+            user = g.user         
+            w = Wallet.objects.get(user=user)
+            w.remove_turn()
+            print(w.reach_limit)  
+            messages.success(request, 'نوبت انتخابی شما، با موفقیت حذف شد')
+            return redirect('PROFILE')
+        return render(request, "arrot/delete_golsa.html", context=context)
+    else:
+        messages.info(request, 'لطفا وارد شوید')
+        return redirect('LOGIN')
+
+
+def changingGolsaItem(request, pk):
+    if request.user.is_authenticated:
+        form = SalonReserve(request.POST or None)
+        obj = get_object_or_404(GolsaModel, pk=pk)
+        auth_user = request.user
+        context = {'field':obj, 'user':auth_user, 'form':form}
+        return render(request, "arrot/change_golsa.html", context=context)
+    else:
+        messages.info(request, "")
+        return redirect("LOGIN")

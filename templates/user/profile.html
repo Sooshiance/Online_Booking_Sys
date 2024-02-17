@@ -31,7 +31,7 @@
                             <i class="bi bi-x-square-fill"></i>
                         </div>
                     {% endif %}
-                    <div class="col-2 mb-3 mt-3 p-3"><a href="" class="h4 btn btn-primary"><i class="bi bi-wrench"></i></a></div>
+                    <div class="col-2 mb-3 mt-3 p-3"><a href="{% url 'CHANGEARROT' afield.pk %}" class="h4 btn btn-primary"><i class="bi bi-wrench"></i></a></div>
                     <div class="col-1 mb-3 mt-3 p-3">
                         <a class="h4" href="{% url 'DELETEARROT' afield.pk %}" style="color: red;">
                             <i class="bi bi-trash3-fill"></i>
@@ -87,7 +87,7 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="row m-5 p-5">
+        <div class="row m-5 p-5 h3">
             <p class="text-center mt-5"> شارژ کیف پول شما</p>
             <div class="col-12 text-center"> {{ wallet.reach_limit }} </div>
         </div>

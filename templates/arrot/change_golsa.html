@@ -1,0 +1,21 @@
+{% extends "root.html" %}
+
+{% block title %}
+
+{{ field.title }}
+
+{% endblock title %}
+
+{% block doc %}
+
+<section class="vh-80">
+    <form action="{% url 'CHANGEGOLSA' field.pk %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <div class="d-grid bt btn-warning">
+            <button type="submit" class="">تغییر</button>
+        </div>
+    </form>
+</section>
+
+{% endblock doc %}
