@@ -18,6 +18,6 @@ def noFriday(date):
 
 def persianFriday(date):
     if date.weekday() == 6:
-        raise ValidationError('')
+        raise ValidationError('این روز تعطیل می باشد')
     else:
         return date 

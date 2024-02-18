@@ -45,6 +45,7 @@ def changingArrotItem(request, pk):
         form = RepairClinic(request.POST or None)
         obj = get_object_or_404(ArrotModel, pk=pk)
         auth_user = request.user
+        context = {'form':form,'field':obj,'user':auth_user}
         if request.method == "POST":
             if form.is_valid() and obj is not None:
                 title = form.cleaned_data['title']
@@ -59,12 +60,13 @@ def changingArrotItem(request, pk):
                 messages.success(request, "")
                 return redirect('PROFILE')
             else:
-                messages.error(request, "")
-                return redirect("CHANGEARROT")
+                messages.error(request, f'{form.errors}')
+                context = {'form':form,'field':obj,'user':auth_user, 'error':messages.ERROR}
+                return render(request, "arrot/change_arrot.html", context=context)
         context = {'field':obj, 'user':auth_user, 'form':form}
         return render(request, "arrot/change_arrot.html", context=context)
     else:
-        messages.info(request, "")
+        messages.info(request, messages.INFO)
         return redirect("LOGIN")
 
 
@@ -73,7 +75,7 @@ def deleteArrotItem(request, pk):
         obj = get_object_or_404(ArrotModel, pk=pk)
         auth_user = request.user
         context = {'field':obj, 'user':auth_user}
-        if request.method=="POST" and get_object_or_404(ArrotModel, pk=pk):
+        if request.method=="POST" and obj is not None:
             obj = ArrotModel.objects.get(pk=pk)
             obj.delete()
             user = obj.user 
@@ -145,6 +147,7 @@ def changingGolsaItem(request, pk):
         form = SalonReserve(request.POST or None)
         obj = get_object_or_404(GolsaModel, pk=pk)
         auth_user = request.user
+        context = {'form':form,'field':obj,'user':auth_user}
         if request.method == "POST":
             if form.is_valid() and obj is not None:
                 title = form.cleaned_data['title']

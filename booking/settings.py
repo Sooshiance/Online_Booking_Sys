@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'jalali_date',
-    # 'jdatetime',
+    'jdatetime',
     # "sslserver",
     "meta",
     # 'rest_framework',
