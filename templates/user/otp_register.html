@@ -14,7 +14,7 @@
               <form class="mb-3 mt-md-4" action="{% url 'OTP-REGISTER' %}" method="post">
                 <h2 class="fw-bold mb-2 text-uppercase text-center pb-5">از طرف تیم پشتیبانی آروت بیوتی</h2>
                 <p class="mb-5">رمز یک بار مصرف را وارد کنید</p>
-                  {{ form.as_p }}
+                {{ form.as_p }}
                 {% csrf_token %}
                 <div class="d-grid">
                   <button class="btn btn-outline-dark" type="submit">وارد شدن</button>
