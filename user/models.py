@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import  BaseUserManager, AbstractBaseUser, PermissionsMixin
-from django_jalali.db import models as jmodels
 
 
 class AllUser(BaseUserManager):
@@ -36,7 +35,7 @@ class AllUser(BaseUserManager):
     def create_staff(self, phone, username, email, password, first_name, last_name):
         user = self.create_user(
             email=email,
-            username=phone,
+            username=username,
             phone=phone,
             password=password,
             first_name=first_name,
