@@ -15,6 +15,7 @@ import os
 import locale
 from decouple import config
 from django.urls import reverse_lazy
+import re 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,8 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,12 +123,12 @@ WSGI_APPLICATION = 'booking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -202,29 +201,13 @@ AUTH_USER_MODEL = "user.User"
 
 
 # TODO : Postgres database 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'HOST': config('DB_HOST'),
-        'PASSWORD': config('DB_PASSWORD'),
-    }
-}
-
-
-# TODO : MySQL database
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'arrot',
-#         'USER': 'root',
-#         'HOST': '127.0.0.1',
-#         'PASSWORD': '',
-#         'PORT': '3306',
-#         'OPTIONS': {  
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-#         },
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'HOST': config('DB_HOST'),
+#         'PASSWORD': config('DB_PASSWORD'),
 #     }
 # }
 
@@ -239,7 +222,7 @@ META_SITE_DOMAIN = config('META_SITE_DOMAIN')
 META_SITE_NAME = config('META_SITE_NAME')
 META_DEFAULT_KEYWORDS = ["پوست", "مو", "زیبایی", "جوانسازی", "چشم"]
 META_INCLUDE_KEYWORDS = ["هایفو", "بوتاکس", "فیلر", "مزوتراپی", "ژل", "ناخن", "لیزر", "ابرو"]
-META_OG_NAMESPACES = []
+META_OG_NAMESPACES = ["هایفو", "بوتاکس", "فیلر", "مزوتراپی", "ژل", "ناخن", "لیزر", "ابرو"]
 
 
 # TODO : uncomment these lines after https goes live
@@ -251,4 +234,13 @@ META_OG_NAMESPACES = []
 # SECURE_HSTS_PRELOAD = True
 # SECURE_CONTENT_TYPE_NOSNIFF = True
 # CSRF_COOKIE_SECURE = True
-# DISALLOWED_USER_AGENTS = []
+
+# DISALLOWED_USER_AGENTS = [
+#     re.compile(r'Slurp'),
+#     re.compile(r'OpenVAS'),
+#     re.compile(r'SQLmap'),
+#     re.compile(r'Nikto'),
+#     re.compile(r'Nmap'),
+#     re.compile(r'Python-urllib'),
+#     re.compile(r'Python-requests'),
+# ]
