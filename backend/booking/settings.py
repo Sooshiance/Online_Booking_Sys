@@ -173,9 +173,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
+# TODO : 
+STATIC_PATH = Path(__file__).resolve().parent.parent.parent
+
+
+# TODO : 
+MEDIA_PATH = Path(__file__).resolve().parent.parent.parent
+
+
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-# STATIC_ROOT = (os.path.join(BASE_DIR, 'ui'),)
+STATICFILES_DIRS = (os.path.join(STATIC_PATH, "static"),)
+# STATIC_ROOT = (os.path.join(STATIC_PATH, 'ui'),)
 
 
 LOGIN_URL = reverse_lazy("LOGIN")
@@ -184,8 +193,8 @@ LOGIN_REDIRECT_URL = reverse_lazy("PROFIILE")
 LOGOUT_REDIRECT_URL = reverse_lazy("HOME")
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL  = '/media/'
+MEDIA_ROOT = MEDIA_PATH / "media"
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -216,7 +225,7 @@ AUTH_USER_MODEL = "user.User"
 MAX_LIMIT = 10
 
 
-# TODO : meta tag for Open Graph and SEO
+# TODO : meta tags for Open Graph and SEO
 META_SITE_PROTOCOL = 'https'
 META_SITE_DOMAIN = config('META_SITE_DOMAIN')
 META_SITE_NAME = config('META_SITE_NAME')
@@ -242,5 +251,4 @@ META_OG_NAMESPACES = ["هایفو", "بوتاکس", "فیلر", "مزوتراپ�
 #     re.compile(r'Nikto'),
 #     re.compile(r'Nmap'),
 #     re.compile(r'Python-urllib'),
-#     re.compile(r'Python-requests'),
 # ]

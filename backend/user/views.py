@@ -116,13 +116,13 @@ def otpRegisterValidation(request):
                         return redirect('HOME')
                     
                     else:
-                        messages.error(request, 'otp is used before or expired')
+                        messages.error(request, 'این گذر واژه استفاده شده')
                         return redirect('OTP-REGISTER-VERIFY')
                 else:
-                    messages.error(request, 'otp time has passed')
+                    messages.error(request, 'این گذر واژه منقضی شده')
                     return redirect('OTP-REGISTER-VERIFY')
             else:
-                messages.error(request, 'the OTP is not acceptable')
+                messages.error(request, 'این گذر واژه درست نیست')
                 return redirect('REGISTER')
             
         else:
