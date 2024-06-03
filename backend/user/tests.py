@@ -11,7 +11,5 @@ class LogInTest(TestCase):
         User.objects.create(**self.credentials)
     
     def test_login(self):
-        # send login data
         response = self.client.post('/user/', self.credentials, follow=True)
-        # should be logged in now
         self.assertTrue(response.context['user'])
