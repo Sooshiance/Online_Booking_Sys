@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.db import connection
 
 from .forms import Ask
 from .models import RepetitiveQuestion, Question
 
 
 def dailyQuestion(request):
+    connection.force_debug_cursor = True
     rq = RepetitiveQuestion.objects.all().order_by('created_at')
+    connection.force_debug_cursor = False
     return render(request, "question/daily.html", {'questions': rq})
 
 
