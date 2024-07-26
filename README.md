@@ -1,7 +1,8 @@
-# This is the Arrot Beauty Club.
+# This is an Online Booking System.
 
 ## It's so called 'Reservation System' with benefits like :
-- Choose date and time for Services 
+
+- Choose date and time for Services
 - Validators for specific date (IRAN day off : Friday has been disable to choose)
 - Blog section for user comment about their experience of Aroot Beauty
 - Question section for users to ensure from the services
@@ -9,10 +10,10 @@
 - Mobile verification via OTP
 - Reset password with Email
 - Reset password with OTP
-- RSS feeds for better indexing 
+- RSS feeds for better indexing
 - Meta third-party for SEO and Ranking
 
-If you found any bug or better solution for a 
+If you found any bug or better solution for a
 Reservation system like this, send a comment for me.
 
 If you want to run this project on local server, please, first fill up some settings in settings.py file like SECRET_KEY, DEBUG and rest of them.
@@ -23,8 +24,7 @@ It's just a simple web application with Django.
 
 I hope that it will become my first project on the live server.
 
-
 Special thanks for the https://bootstrapmade.com/bootstrap-5-templates/
-website for this beautiful template. 
+website for this beautiful template.
 
 I use their free template time to time.
